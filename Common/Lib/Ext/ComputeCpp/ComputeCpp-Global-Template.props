@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+	This is a template file for generating ComputeCpp-Global.props.
+	Download ComputeCpp from https://developer.codeplay.com/computecppce, extract it here
+	and execute SetupComputeCpp.py to generate ComputeCpp-Global.props.
+	It is important to perform this step before opening the Visual Studio solution.
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <ComputeCppVersion>COMPUTECPP_VERSION</ComputeCppVersion>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(AMDTCommonExt)ComputeCpp\ComputeCpp-CE-$(ComputeCppVersion)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalLibraryDirectories>$(AMDTCommonExt)ComputeCpp\ComputeCpp-CE-$(ComputeCppVersion)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>ComputeCpp_vs2015$(GDTDebugSuffixUnderscore).lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="ComputeCppVersion">
+      <Value>$(ComputeCppVersion)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

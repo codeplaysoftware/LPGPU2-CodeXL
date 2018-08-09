@@ -1,0 +1,79 @@
+#++AT:LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "LPGPU2PowerModelsBase"
+
+env = CXL_env.Clone()
+
+
+env.Append( CPPPATH = [
+    ".",
+    "..",
+    env['CXL_commonproj_dir'],
+    env['CXL_commonproj_dir'] + "/AMDTOSAPIWrappers/Include",
+    env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+    env['CXL_commonproj_dir'] + '/../../CodeXL',
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/PowerProfiling/",
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/PowerProfiling/MiddleTier",
+])
+
+UseBoost(env)
+UseGtk(env)
+UseTinyXml(env)
+UseQScintilla(env)
+UseQt4(env)
+UseQCustomPlot(env)
+UseAPPSDK(env)
+
+# Create the sources list with only the files necessary for the library
+sources = \
+[
+  "LPGPU2PowerModelsConfigManager.cpp",
+  "LPGPU2LinearPowerModel.cpp",
+  "LPGPU2PowerModelsFactory.cpp"
+]
+
+resources = \
+[
+    "LPGPU2PowerModelsConfig.xml",
+    "LPGPU2PowerModelsConfigSimp.xml",
+]
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+env.Append(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLOSAPIWrappers",
+  "CXLAPIClasses",
+  "CXLApplicationComponents",
+  "CXLDbAdapter",
+  "CXLPowerProfilingMidTier",
+  "libboost_program_options",
+  "libpthread",
+])
+
+
+# Creating the shared libraries
+soFiles = env.SharedLibrary(
+  target = libName,
+  source = objFiles)
+
+
+# Installing libraries
+libInstall = env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (soFiles))
+
+# Installing the xml config files
+libInstall += env.Install(
+    dir = env['CXL_lib_dir']+ "/LPGPU2_PowerModels",
+    source = (resources))
+
+Return('libInstall')
+#--AT:LPGPU2

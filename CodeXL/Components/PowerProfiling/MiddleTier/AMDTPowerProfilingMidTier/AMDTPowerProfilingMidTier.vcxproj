@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DE8338B7-998E-42D0-BE79-25F2B0CAE0D7}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AMDTPowerProfilingMidTier</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="AMDTPowerProfilingMidTier.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\..\..\..\Common\Lib\Ext\tinyxml\Global-TinyXML-2015.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\..\..\..\..\Common\Lib\Ext\tinyxml\Global-TinyXML-2015.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\..\..\..\Common\Lib\Ext\SPIRV-Tools\SPIRV-Tools.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\..\..\..\..\Common\Lib\Ext\SPIRV-Tools\SPIRV-Tools.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>AMDTPOWERPROFILINGMIDTIER_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CXLDbAdapter$(GDTProjectSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Link>
+      <AdditionalDependencies Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CXLDbAdapter$(GDTProjectSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="include\AMDTPowerProfilingMidTier.h" />
+    <ClInclude Include="include\BackendDataConvertor.h" />
+    <ClInclude Include="include\IPowerProfilerBackendAdapter.h" />
+    <ClInclude Include="include\LocalBackendAdapter.h" />
+    <ClInclude Include="include\LPGPU2_AndroidBackendAdapter.h" />
+    <ClInclude Include="include\LPGPU2_BaseDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_CounterDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_ShaderDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_ShaderMetaDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_StackDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_TraceParamsDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_TraceDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_GPUTimingDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_AnnotationsDataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_DataPacketParser.h" />
+    <ClInclude Include="include\LPGPU2_PPAndroidPollingThread.h" />
+    <ClInclude Include="include\PowerProfilerBL.h" />
+    <ClInclude Include="include\PowerProfilerCore.h" />
+    <ClInclude Include="include\PowerProfilerDefs.h" />
+    <ClInclude Include="include\PowerProfilerMidTierUtil.h" />
+    <ClInclude Include="include\PPDevice.h" />
+    <ClInclude Include="include\ppLPGPU2TargetCharacteristics.h" />
+    <ClInclude Include="include\LPGPU2ppTargetDefinition.h" />
+    <ClInclude Include="include\LPGPU2ppXMLParserCommon.h" />
+    <ClInclude Include="include\LPGPU2ppPowerModels.h" />
+    <ClInclude Include="include\PPPollingThread.h" />
+    <ClInclude Include="include\RemoteBackendAdapter.h" />
+    <ClInclude Include="include\LPGPU2_AndroidRemoteProtocolBuildDefinitions.h" />
+	<ClInclude Include="include\LPGPU2ppSPIRVDisassembler.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\BackendDataConvertor.cpp" />
+    <ClCompile Include="src\LocalBackendAdapter.cpp" />
+    <ClCompile Include="src\LPGPU2_AndroidBackendAdapter.cpp" />
+    <ClCompile Include="src\LPGPU2_AnnotationsDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_BaseDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_CounterDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_GPUTimingDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_ShaderDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_ShaderMetaDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_StackDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_TraceParamsDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_TraceDataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_DataPacketParser.cpp" />
+    <ClCompile Include="src\LPGPU2_PPAndroidPollingThread.cpp" />
+    <ClCompile Include="src\PowerProfilerBL.cpp" />
+    <ClCompile Include="src\PowerProfilerCore.cpp" />
+    <ClCompile Include="src\PowerProfilerMidTierUtil.cpp" />
+    <ClCompile Include="src\PPDevice.cpp" />
+    <ClCompile Include="src\ppLPGPU2TargetCharacteristics.cpp" />
+    <ClCompile Include="src\LPGPU2ppTargetDefinition.cpp" />
+    <ClCompile Include="src\LPGPU2ppXMLParserCommon.cpp" />
+    <ClCompile Include="src\LPGPU2ppPowerModels.cpp" />
+    <ClCompile Include="src\PPPollingThread.cpp" />
+    <ClCompile Include="src\RemoteBackendAdapter.cpp" />
+	<ClCompile Include="src\LPGPU2ppSPIRVDisassembler.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

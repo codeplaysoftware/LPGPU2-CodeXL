@@ -1,0 +1,499 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Generated files">
+      <UniqueIdentifier>{2a75235d-518d-424d-8fb2-ab0ad804e649}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="public inc">
+      <UniqueIdentifier>{9e13217e-3f07-42df-908d-d00010ad4be7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource files">
+      <UniqueIdentifier>{935a8adf-f314-4b6c-806e-01323ee86e33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{1f40a388-5675-4bde-97c5-5daec101de48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Include">
+      <UniqueIdentifier>{475e6bc9-8a40-4c03-80ec-bb8432798581}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{4d23dd88-62a2-439e-8b4d-6fc8ebf1c6d2}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\dllmain.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGAppWrapper.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGExecutionMode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGClassCmnBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGResourcesString.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_gui_ToolbarMainWnd.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_ToolbarMainWnd.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MenuActionsExecutor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewCreator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIGeneralActionsCreator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_util_VariantType.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_Invoker.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_RegisterAll.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_Factory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdProjectNew.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdProjectClose.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_Params.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdSwitchCCVGMode.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_TheCurrentState.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_gui_TabPageSettings.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_TabPageSettings.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdProjectSettingsDlgOpen.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdBaseWithParams.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_gui_ProjectSettings.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_ProjectSettings.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectSettings.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_EventObserver.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_gui_AppTreeHandler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_AppTreeHandler.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_util_Functions.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_wgt_LineEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_wgt_LineEdit.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_wgt_GroupBoxHideTooltipOverChild.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_wgt_GroupBoxHideTooltipOverChild.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_wgt_ButtonDirFolder.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_gui_WidgetStringConstants.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectData.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateCurrentPCUser.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadAll.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadSource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadResults.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadDrivers.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_util_MsgDlg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdProjDataSetNoDriverFilesReq.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_AppTreeDataExtn.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_fw_AppTreeDataExtn.cpp">
+      <Filter>Generated files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdsGlobalFns.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGResourcesIcon.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdWndSrcOpen.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFileRead.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_util_File.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectDataCcvg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataDriver.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataResults.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataSource.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewId.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewRegisterAll.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewFactory.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewMgr.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewBase.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_fw_MDIViewSourceCodeNonEdit.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadExecuteable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGHighlight.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVGResourcesColor.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGHighlight.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionCovMap.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionResult.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionSummary.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMMapping.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMResultTextReader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMCoverageHighlighter.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_LLVMCovMapReader.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataExecuteable.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(CommonProjectsDir)\VersionInfo\VersionResource.rc">
+      <Filter>Resource files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\CCVGAppWrapper.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGDLLBuild.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGExecutionMode.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGDataTypes.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGClassCmnBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGResourcesString.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_gui_WidgetStringConstants.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MenuActionsExecutor.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewCreator.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIGeneralActionsCreator.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_util_SingletonBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_util_VariantType.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_Invoker.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdIDs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_Params.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_Factory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_Parameter.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_RegisterAll.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectNew.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectClose.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_CommandIDs.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdSwitchCCVGMode.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentState.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectSettingsDlgOpen.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdBaseWithParams.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectSettings.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_EventObserver.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGResourcesIcon.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFileRead.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadAll.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadDrivers.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadExecuteable.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadResults.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadSource.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdProjDataSetNoDriverFilesReq.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmd_CmdWndSrcOpen.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataDriver.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataEnumTypes.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataExecuteable.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataSource.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewBase.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewEnumTypes.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewFactory.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewId.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewMgr.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewRegisterAll.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_MDIViewSourceCodeNonEdit.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateCurrentPCUser.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectData.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectDataCcvg.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_util_File.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_util_Functions.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_util_MsgDlg.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_wgt_ButtonDirFolder.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGHighlight.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_CCVGHighlightType.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVGResourcesColor.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionSummary.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionResult.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionCovMap.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMCovMapReader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMCoverageHighlighter.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMResultTextReader.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMRegionExprType.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Include\CCVG_cmn_LLVMMapping.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="Include\CCVG_fw_AppTreeDataExtn.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_AppTreeHandler.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_ProjectSettings.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_TabPageSettings.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_ToolbarMainWnd.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_wgt_GroupBoxHideTooltipOverChild.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_wgt_LineEdit.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVGProjectBuildDefinitions.h">
+      <Filter>Include</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Disable_CCVGBuild.bat">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="Enable_CCVGBuild.bat">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="CopyFiles_AnyConfiguration_LPGPU2.bat">
+      <Filter>Scripts</Filter>
+    </None>
+    <None Include="Include\CCVG_cmn_CCVGItemDataResults.h">
+      <Filter>Include</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,40 @@
+#++KB: LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "sqlite"
+
+env = CXL_env.Clone()
+
+# Remove the c++ flag for the env_no_c11 library
+fullBuildFlags = env['CPPFLAGS']
+partBuildString = fullBuildFlags.replace('-std=c++11','')
+env.Replace( CPPFLAGS = partBuildString)
+
+env.Append( CPPPATH = [ 
+	".",
+	"./3.9.2/",
+	env['CXL_common_dir'] + '/Src/sqlite/3.9.2/'
+])
+
+sources = [
+   "3.9.2/sqlite3.c"
+]
+
+# Creating object files	
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+soFiles = env.SharedLibrary(
+	target = libName, 
+	source = objFiles)
+
+# Installing libraries
+libInstall = env.Install( 
+	dir = env['CXL_lib_dir'], 
+	source = (soFiles))
+
+Return('libInstall')
+#--KB: LPGPU2

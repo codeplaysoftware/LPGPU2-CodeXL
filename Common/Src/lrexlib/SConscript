@@ -1,0 +1,58 @@
+#++KB: LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "rex_pcre"
+
+env = CXL_env.Clone()
+
+# Remove the c++ flag for the env library
+fullBuildFlags = env['CPPFLAGS']
+partBuildString = fullBuildFlags.replace('-std=c++11', '')
+env.Replace(CPPFLAGS = partBuildString)
+
+lpcre_version = '2.7.1'
+
+env.Append(CPPFLAGS = ' -DLUA_USE_LINUX')
+env.Append(CPPFLAGS = ' -DLUA_COMPAT_APIINTCASTS')
+env.Append(CPPFLAGS = ' -DVERSION=\\"' + lpcre_version + '\\"')
+env.Append(CPPFLAGS = ' -DREX_LIBNAME=\\"librex_pcre\\"')
+env.Append(CPPFLAGS = ' -DREX_OPENLIB=luaopen_librex_pcre')
+env.Append(CPPFLAGS = ' -DPCRE_STATIC')
+
+env.Append(CPPPATH = [ 
+	".",    
+    lpcre_version + '/src',
+    env['CXL_common_dir'] + '/Src/lua/5.3.4/src',
+	env['CXL_common_dir'] + "/Src/lrexlib/" + lpcre_version + '/src',
+])
+
+sources = [
+    'common.c',
+    'pcre/lpcre.c',
+    'pcre/lpcre_f.c'
+]
+
+env.Prepend(LIBS = [
+    "liblua",
+    "libpcre"
+])
+
+sources = [lpcre_version + '/src/' + source_file for source_file in sources]
+
+# Creating object files	
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+soFiles = env.SharedLibrary(
+	target = libName, 
+	source = objFiles)
+
+# Installing libraries
+libInstall = env.Install( 	
+	dir = env['CXL_lib_dir'], 
+	source = (soFiles))
+
+Return('libInstall')

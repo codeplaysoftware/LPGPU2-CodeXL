@@ -1,0 +1,243 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "CXLPowerProfiling"
+
+env = CXL_env.Clone()
+
+#need to add to compiler flags c++11
+compiler_add_base_flags = " -DBOOST_REGEX_NO_EXTERNAL_TEMPLATES"
+
+env.Append(CPPFLAGS = compiler_add_base_flags)
+
+UseQt4(env)
+#++AT:LPGPU2DEMO_V
+UseQScintilla(env)
+#--AT:LPGPU2DEMO_V
+UseTinyXml(env)
+UseQCustomPlot(env)
+
+env.Append( CPPPATH = [
+    ".",
+    "../",
+    "./Include",
+    env['CXL_commonproj_dir'],
+    env['CXL_common_dir'] +"/../CodeXL/Components/PowerProfiling/",
+    env['CXL_common_dir'] +"/../CodeXL/Components/PowerProfiling/AMDTPowerProfiling/Include/",
+    env['CXL_common_dir'] +"/../CodeXL/Components/PowerProfiling/Backend/AMDTPowerProfileAPI/inc/",
+    env['CXL_common_dir'] +"/../CodeXL/Components/PowerProfiling/MiddleTier",
+    env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+    env['CXL_common_dir'] + "/Src/TSingleton",
+    env['CXL_common_dir'] + '/../CodeXL/Remote',
+    env['CXL_common_dir'] + '/../CodeXL',
+    env['CXL_common_dir'] + '/../CodeXL/Components',
+#++AT:LPGPU2
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/CpuProfiling/",
+#--AT:LPGPU2
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/PowerProfiling/LPGPU2PowerModeling/LPGPU2PowerModelsBase",
+])
+
+moc_files = Split(
+    " src/ppAppController.h"
+    + " src/ppCountersSelectionDialog.h"
+    + " src/ppMultiLinePlot.h"
+    + " src/ppMultiLinePowerStackedPlot.h"
+    + " src/ppMultiLinePowerNonStackedPlot.h"
+    + " src/ppProjectSettingsExtension.h"
+    + " src/ppSessionNavigationChart.h"
+    + " src/ppSessionView.h"
+    + " src/ppSummaryView.h"
+    + " src/ppTimelineView.h"
+    + " src/ppTimeline.h"
+#++AT:LPGPU2DEMO_V
+    + " src/ppProjectLPGPU2SettingsExtension.h"
+    + " src/ppLPGPU2CounterList.h"
+    + " src/LPGPU2ppGLTimelineItem.h"
+#++AT:LPGPU2DEMO_V
+    + " src/LPGPU2ppMultiSourceCodeView.h"
+    + " src/LPGPU2ppSourceCodeView.h"
+    + " src/LPGPU2ppVerticalLabel.h"
+#--AT:LPGPU2DEMO_V
+#++KB:LPGPU2DEMO_V
+    + " src/LPGPU2ppHelpTimelineItem.h"
+#--KB:LPGPU2DEMO_V
+#++CF:LPGPU2
+    + " src/ppLPGPU2MultiRegionOfInterestView.h"
+    + " src/ppLPGPU2RegionOfInterestView.h"
+    + " src/LPGPU2ppMultiLinePlot.h"
+	+ " src/LPGPU2ppPieChartWidget.h"
+    + " src/LPGPU2ppLongestRunningFunctionsView.h"
+    + " src/LPGPU2ppCallSuggestionsView.h"
+    + " src/LPGPU2ppShadersInRegionView.h"
+    + " src/LPGPU2ppCallsPerTypeView.h"
+    + " src/LPGPU2ppFeedbackAnalysisView.h"
+    + " src/LPGPU2ppFeedbackEngineDialog.h"
+    + " src/LPGPU2ppFeedbackEngineOptionWidget.h"
+    + " src/LPGPU2ppShaderAnalysisView.h"
+    + " src/LPGPU2ppSessionComparisonView.h"
+    + " src/LPGPU2ppFrameDetailView.h"
+    + " src/LPGPU2ppMultiFrameDetailView.h"
+    + " src/LPGPU2ppFrameAPICallTable.h"
+    + " src/LPGPU2ppFrameCounterSummaryTable.h"
+    + " src/LPGPU2ppFrameTimeline.h"
+    + " src/LPGPU2ppInfoWidget.h"
+    + " src/LPGPU2ppTimelineItem.h"
+    + " src/LPGPU2ppRunFeedbackEngineShortcutFrame.h"
+#--CF:LPGPU2
+    + " Include/ppWindowsManagerHelper.h"
+#++AT:LPGPU2
+    + " src/LPGPU2ppFrameTerminatorSelectionWidget.h"
+    + " src/LPGPU2ppTimerTimingModeFrame.h"
+    + " src/LPGPU2ppFlushDataDialogWidget.h"
+    + " src/LPGPU2ppAppsListWidget.h"
+    + " src/LPGPU2ppSourceCodeWithSplitView.h"
+    + " src/LPGPU2ppSourceCodeTreeModel.h"
+#--AT:LPGPU2
+#++TLRS:LPGPU2
+    + " src/LPGPU2ppADBCommands.h"
+    + " src/LPGPU2ppADBCommandsExecutor.h"
+    + " src/LPGPU2ppInstallAPKDialog.h"
+#--TLRS:LPGPU2
+    )
+
+sources = \
+[
+    "src/ppColors.cpp",
+    "src/ppAidFunctions.cpp",
+    "src/ppAppController.cpp",
+    "src/ppAppWrapper.cpp",
+    "src/ppCountersSelectionDialog.cpp",
+    "src/ppCountersSortOrder.cpp",
+    "src/ppDataUtils.cpp",
+    "src/ppMDIViewCreator.cpp",
+    "src/ppMenuActionsExecutor.cpp",
+    "src/ppMultiLinePlot.cpp",
+    "src/ppMultiLinePowerStackedPlot.cpp",
+    "src/ppMultiLinePowerNonStackedPlot.cpp",
+    "src/ppProjectSettingsExtension.cpp",
+    "src/ppSessionActionsCreator.cpp",
+    "src/ppSessionController.cpp",
+    "src/ppSessionNavigationChart.cpp",
+    "src/ppSessionView.cpp",
+#++AT:LPGPU2DEMO_V
+    "src/ppProjectLPGPU2SettingsExtension.cpp",
+    "src/ppLPGPU2CounterList.cpp",
+    "src/ppLPGPU2CollectionDefs.cpp",
+    "src/LPGPU2ppMultiSourceCodeView.cpp",
+    "src/LPGPU2ppSourceCodeView.cpp",
+    "src/LPGPU2ppVerticalLabel.cpp",
+#--AT:LPGPU2DEMO_V
+    "src/ppSingletonsDelete.cpp",
+    "src/ppSummaryView.cpp",
+    "src/ppTimelineView.cpp",
+    "src/LPGPU2ppGLTimelineItem.cpp",
+#++KB:LPGPU2DEMO_V
+    "src/LPGPU2ppHelpTimelineItem.cpp",
+#--KB:LPGPU2DEMO_V
+#++CF:LPGPU2
+    "src/ppLPGPU2MultiRegionOfInterestView.cpp",
+    "src/ppLPGPU2RegionOfInterestView.cpp",
+    "src/LPGPU2ppMultiLinePlot.cpp",
+	"src/LPGPU2ppPieChartWidget.cpp",
+    "src/LPGPU2ppLongestRunningFunctionsView.cpp",
+    "src/LPGPU2ppCallSuggestionsView.cpp",
+    "src/LPGPU2ppShadersInRegionView.cpp",
+    "src/LPGPU2ppCallsPerTypeView.cpp",
+    "src/LPGPU2ppFeedbackAnalysisView.cpp",
+    "src/LPGPU2ppShaderAnalysisView.cpp",
+    "src/LPGPU2ppSessionComparisonView.cpp",
+    "src/LPGPU2ppFrameDetailView.cpp",
+    "src/LPGPU2ppMultiFrameDetailView.cpp",
+    "src/LPGPU2ppFrameAPICallTable.cpp",
+    "src/LPGPU2ppFrameCounterSummaryTable.cpp",
+    "src/LPGPU2ppFrameTimeline.cpp",
+    "src/LPGPU2ppInfoWidget.cpp",
+    "src/LPGPU2ppTimelineItem.cpp",
+#--CF:LPGPU2
+    "src/ppTimeline.cpp",
+    "src/ppTreeHandler.cpp",
+    "src/ppWindowsManagerHelper.cpp",
+#++AT:LPGPU2
+    "src/LPGPU2ppMenuActionExecutor.cpp",
+    "src/LPGPU2ppFeedbackEngineDialog.cpp",
+    "src/LPGPU2ppFeedbackEngineOptionWidget.cpp",
+    "src/LPGPU2ppRunFeedbackEngineShortcutFrame.cpp",
+    "src/LPGPU2ppTimerTimingModeFrame.cpp",
+    "src/LPGPU2ppFrameTerminatorSelectionWidget.cpp",
+    "src/LPGPU2ppFlushDataDialogWidget.cpp",
+    "src/LPGPU2ppAppsListWidget.cpp",
+    "src/LPGPU2ppSourceCodeWithSplitView.cpp",
+    "src/LPGPU2ppSourceCodeTreeModel.cpp",
+#--AT:LPGPU2
+#++TLRS:LPGPU2
+    "src/LPGPU2ppADBCommands.cpp",
+    "src/LPGPU2ppADBCommandsExecutor.cpp",
+    "src/LPGPU2ppInstallAPKDialog.cpp"
+#--TLRS:LPGPU2
+]
+
+commonLinkedLibraries = \
+[
+    "CXLBaseTools",
+    "CXLOSWrappers",
+    "CXLDbAdapter",
+    "CXLAPIClasses",
+    "CXLApplicationFramework",
+    "CXLProfilerDAL",
+    "CXLPowerProfilingMidTier",
+    "CXLPowerProfileAPI",
+    "CXLCpuProfiling",
+    "CXLApplicationComponents",
+    "CXLSharedProfiling",
+    "LPGPU2Database",
+    "libpthread",
+ #++NM:LPGPU2
+    "LPGPU2PowerModelsBase",
+#--NM:LPGPU2
+]
+
+# Building moc content
+MOC_Generated = []
+for moc_file in moc_files:
+    MOC_Generated += env.MocBld(moc_file)
+
+# Contains all linked libraries:
+linkedLibraries = commonLinkedLibraries
+env.Prepend (LIBS = linkedLibraries)
+
+# Creating object files
+objFiles = env.SharedObject(sources + MOC_Generated)
+
+# Creating shared libraries
+soFiles = env.SharedLibrary(
+    target = libName,
+    source = objFiles)
+
+# list all the files in the LPGPU2RemoteProtocolFolder
+# CF:LPGPU2 - for some reason we have to try both these directories to make
+#             it work with Jenkins and normal builds.
+if os.path.isdir("../../../Remote/LPGPU2RemoteProtocol"):
+    apks_folder = os.path.abspath("../../../Remote/LPGPU2RemoteProtocol")
+else:
+    apks_folder = os.path.abspath("../../Remote/LPGPU2RemoteProtocol")
+apks_list = list()
+
+for apk_file in os.listdir(apks_folder):
+    apk_file_fullpath = os.path.join(apks_folder, apk_file)
+    apks_list.append(os.path.abspath(apk_file_fullpath))
+
+filesInstall = env.Install(
+    dir = env['CXL_lib_dir'] + "/LPGPU2_RAgent",
+    source = apks_list
+)
+
+libInstall = env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (soFiles))
+
+install = filesInstall + libInstall
+
+Return("install")

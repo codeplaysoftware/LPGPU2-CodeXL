@@ -1,0 +1,62 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+programName = "LPGPU2DatabaseCLI-bin"
+
+env = CXL_env.Clone()
+
+UseBoost(env)
+
+env.Append( CPPPATH = [
+  ".",
+  "../",
+  "../../",
+  env['CXL_commonproj_dir'],
+  env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+  env['CXL_common_dir'] + '/Src/sqlite/3.9.2/',
+  env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/"
+])
+
+resources = \
+[
+    "LinuxResources/LPGPU2DatabaseCLI"
+]
+
+env.Append(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLProfilerDAL",
+  "CXLDbAdapter",
+  "libboost_program_options",
+  "libpthread",
+  "libsqlite",
+  "LPGPU2Database",
+  "LPGPU2InputOutput"
+])
+
+# Create the sources list with the files for the CLI
+sources = [
+  "LPGPU2DatabaseCLI.cpp",
+]
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+# Creating the executable
+programFiles = env.Program(
+  target = programName,
+  source = objFiles)
+
+# Installing libraries
+programInstall = env.Install(
+  dir = env['CXL_lib_dir'],
+  source = (programFiles))
+
+# Installing the launch script libraries
+programInstall += env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (resources))
+
+Return('programInstall')

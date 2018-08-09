@@ -1,0 +1,112 @@
+﻿<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0;">
+    <title>Welcome to CodeXL</title>
+    <script type="text/javascript">
+        var doc = document.getElementById('doc');
+        doc.removeAttribute('class', 'no-js');
+        doc.setAttribute('class', 'js');
+        var current_mode = 'code_coverage';       
+        function clickButton(action) {
+            console.log(action);
+        }
+        function goLPGU2CCVG() {
+            document.getElementById('main_image').src = './welcomepage_LPGPU2_CCVG_large.png';
+            document.getElementById('code_coverage_side_image').src = './arrow.png';
+            document.getElementById('code_coverage_image').src = './welcomepage_LPGPU2_CCVG_selected.png';
+            document.getElementById('code_coverage_div').style.visibility = 'visible';
+            document.getElementById('code_coverage_div').style.height = 'auto';
+            document.getElementById('code_coverage_div').style.minHeight = '300px';
+            current_mode = 'code_coverage';
+        }
+        function init()
+        {
+            goLPGU2CCVG();
+            
+            window.OSName = 'Linux';
+            if (navigator.appVersion.indexOf("Win") != -1) window.OSName = 'Windows';
+            if (window.OSName == 'Linux') {
+                document.getElementById('d3d12multithreading_tr').style.visibility = 'hidden';
+            }
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="welcome.css">
+    <link rel='stylesheet' media='screen and (max-width: 1300px)' href='low_resolution.css' />
+</head>
+    <body id="page" onload="init();">
+        <div class="wrapper">
+            <div id="content">
+                <table cellpadding="0" cellspacing="0" style="width:90%; margin: 0px 0px 0px 0px;">
+                    <tr>
+                        <td></td>
+                        <td id="main_image_td" class="white_bg" class="middle_td">
+                            <img id="main_image" src=".\welcomepage_LPGPU2_CCVG_large.png" />
+                        </td>
+                        <td width="100%">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td style="padding-top:10px; padding-right: 20px; margin-right:0;">
+                            <table cellspacing="0" style="height:100%; border-spacing: 0px 0px;">
+                                <tr class='clickableRow' onclick="goLPGU2CCVG()">
+                                    <td><img id="code_coverage_side_image" src="arrow.png" /></td>
+                                    <td><img id="code_coverage_image" src="welcomepage_LPGPU2_CCVG_selected.png" onmouseover="document.getElementById('code_coverage_image').src = './welcomepage_LPGPU2_CCVG_selected.png';" onmouseout="    if (current_mode != 'code_coverage') document.getElementById('code_coverage_image').src = './welcomepage_LPGPU2_CCVG.png';" /></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td id="frame_td" class="middle_td">
+                            <div id="code_coverage_div" class="white_bg" style="height:0px">
+                                <table cellspacing="0" id="mode_table" class="white_bg">
+                                    <tr class='clickableRow' onclick='clickButton("new_project_code_coverage")'>
+                                        <td><img src="LPGPU2_CCVG_new.png" /></td>
+                                        <td style="vertical-align:top; ">
+                                            <div class="clickableRow_title">
+                                                Create a new project 
+                                            </div>
+                                            <div class="clickableRow_text">
+												Create a new project to import LLVM code coverage analysis result files. In the project settings dialog <br>set the source of the files.
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td id="recent_td">
+                            <table id="recent_table">
+                                <thead><img src='recent_projects.png' /></thead>
+                                <tbody>
+                                    <tr><td></td></tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td class="middle_td">
+                            <table id="sample_table">
+                                <thead><img src='samples.png' /></thead>
+                                <tbody>
+                                    <tr><td>None</td></tr>          
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="push"></div>
+        </div>
+        <div class="footer">
+            <div id="footer_in">
+                <table width=100%>
+                    <tr>
+                        <td>
+                            <ul style="white-space:nowrap">
+                                <li><a href="" onclick='clickButton("show_help")'>User Guide</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" onclick='clickButton("show_quick_start")'>Getting Started</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" onclick='clickButton("show_website")'>CodeXL Web Site</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="" onclick='    clickButton("show_about")'>About CodeXL</a></li>
+                            </ul>
+                        </td>
+                        <td align=right><img src="StartupPage_CodeXLLogo_LPGPU2.png"></img></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </body>

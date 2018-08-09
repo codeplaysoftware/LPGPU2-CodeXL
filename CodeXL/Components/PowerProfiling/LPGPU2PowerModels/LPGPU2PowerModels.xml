@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<supported_devices_power_models>
+	<devices>
+		<device>
+			<id>1123</id>
+			<name>Nexus Player</name>
+			<description>Intel COre Imagination GPU etc..</description>
+			
+			<available_counters>
+				<counter>
+					<id>01</id>
+					<name>cpu_core_0_freq</name>
+					<description>Core 0 Frequency</description>
+				</counter>
+				<counter>
+					<id>02</id>
+					<name>cpu_core_1_freq</name>
+					<description>Core 1 Frequency</description>
+				</counter>
+				<counter>
+					<id>03</id>
+					<name>gpu_util</name>
+					<description>GPU Utilisation</description>
+				</counter>
+				<counter>
+					<id>01</id>
+					<name>gpu_freq</name>
+					<description>GPU Frequency</description>
+				</counter>
+                        </available_counters>
+		</device>
+		<device>
+			<id>1122</id>
+			<name>Samsung S7</name>
+			<description>Snapdragon Core Adreno GPU etc..</description>
+
+			<available_counters>
+				<counter>
+					<id>01</id>
+					<name>cpu_core_0_freq</name>
+					<description>Core 0 Frequency</description>
+				</counter>
+				<counter>
+					<id>02</id>
+					<name>cpu_core_1_freq</name>
+					<description>Core 1 Frequency</description>
+				</counter>
+				<counter>
+					<id>03</id>
+					<name>gpu_util</name>
+					<description>GPU Utilisation</description>
+				</counter>
+                        </available_counters>
+		</device>
+	</devices>
+
+	<power_models>
+
+		<power_model>
+			<uuid>model1_ver_12</uuid>
+			<name>Linear Model 1</name>
+			<description>Linear regression model</description>
+			<longDescription>Describing parameters list or any other stuff param1 = 20, param2 =30 etc...</longDescription>
+
+			<supportedDevices>
+				<device>
+					<id>1123</id>
+					<required_counters>
+						<counterId>01</counterId>
+						<counterId>02</counterId>
+						<counterId>03</counterId>
+					</required_counters>					
+				</device>
+
+				<device>
+					<id>1122</id>
+					<required_counters>
+						<counterId>01</counterId>
+						<counterId>02</counterId>
+						<counterId>03</counterId>
+					</required_counters>					
+				</device>
+			</supportedDevices>
+		</power_model>
+	</power_models>
+	
+
+
+</supported_devices_power_models>

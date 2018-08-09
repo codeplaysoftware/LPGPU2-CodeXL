@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<supported_devices_power_models>
+	<devices>
+		<device>
+			<id>1123</id>
+			<name>Asus - Nexus Player(fugu)</name>
+			<description>Intel Core Imagination GPU etc. </description>
+			
+			<available_counters>
+				<counter>
+					<id>4100</id>
+					<name>Compute active</name>
+					<description>Compute active</description>
+					<model_mapped_name>compute_active</model_mapped_name>
+				</counter>
+				<counter>
+					<id>4097</id>
+					<name>Tiler active</name>
+					<description>Tiler active</description>
+					<model_mapped_name>tiler_active</model_mapped_name>
+				</counter>
+				<counter>
+					<id>4098</id>
+					<name>Renderer active</name>
+					<description>Renderer active</description>
+					<model_mapped_name>renderer_active</model_mapped_name>
+				</counter>				
+				<counter>
+					<id>3</id>
+					<name>gpu_util</name>
+					<description>GPU Utilisation</description>
+					<model_mapped_name>gpu_util</model_mapped_name>
+				</counter>
+				<counter>
+					<id>4</id>
+					<name>gpu_freq</name>
+					<description>GPU Frequency</description>
+					<model_mapped_name>gpu_freq</model_mapped_name>
+				</counter>
+			</available_counters>
+		</device>
+		<device>
+			<id>1122</id>
+			<name>Samsung S7</name>
+			<description>Snapdragon Core Adreno GPU etc..</description>
+
+			<available_counters>
+				<counter>
+					<id>1</id>
+					<name>cpu_core_0_freq</name>
+					<description>Core 0 Frequency</description>
+					<model_mapped_name>cpu_core_0_freq</model_mapped_name>
+				</counter>
+				<counter>
+					<id>2</id>
+					<name>cpu_core_1_freq</name>
+					<description>Core 1 Frequency</description>
+					<model_mapped_name>cpu_core_1_freq</model_mapped_name>
+				</counter>
+				<counter>
+					<id>3</id>
+					<name>gpu_util</name>
+					<description>GPU Utilisation</description>
+					<model_mapped_name>gpu_util</model_mapped_name>
+				</counter>
+			</available_counters>
+		</device>
+	</devices>
+
+	<power_models>
+
+		<power_model>
+			<uuid>linear_model_v1_0</uuid>
+			<name>Linear Model 1</name>
+			<description>Linear regression model</description>
+			<longDescription>Describing parameters list or any other stuff param1 = 20, param2 =30 etc...</longDescription>
+
+			<supportedDevices>
+				<device>
+					<id>1123</id>
+					<required_counters>
+						<counterId>4097</counterId>
+						<counterId>4098</counterId>
+						<counterId>4100</counterId>
+					</required_counters>		
+
+					<parameters>
+						<parameter>
+							<name>a</name>
+							<type>float</type>
+							<value>2.49731337</value>
+						</parameter>
+						<parameter>
+							<name>b</name>
+							<type>float</type>
+							<value>2.6344012</value>
+						</parameter>
+						<parameter>
+							<name>c</name>
+							<type>float</type>
+							<value>-0.37608624</value>
+						</parameter>
+							<parameter>
+							<name>c</name>
+							<type>float</type>
+							<value>1.23649962</value>
+						</parameter>
+					</parameters>
+				</device>
+
+				
+			</supportedDevices>			
+
+		</power_model>
+
+	</power_models>
+
+
+</supported_devices_power_models>

@@ -1,0 +1,464 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ppAidFunctions.cpp" />
+    <ClCompile Include="src\ppAppController.cpp" />
+    <ClCompile Include="src\ppAppWrapper.cpp" />
+    <ClCompile Include="src\ppColors.cpp" />
+    <ClCompile Include="src\ppCountersSelectionDialog.cpp" />
+    <ClCompile Include="src\ppCountersSortOrder.cpp" />
+    <ClCompile Include="src\ppDataUtils.cpp" />
+    <ClCompile Include="src\ppMenuActionsExecutor.cpp" />
+    <ClCompile Include="src\ppMDIViewCreator.cpp" />
+    <ClCompile Include="src\ppMultiLinePlot.cpp" />
+    <ClCompile Include="src\ppMultiLinePowerNonStackedPlot.cpp" />
+    <ClCompile Include="src\ppMultiLinePowerStackedPlot.cpp" />
+    <ClCompile Include="src\ppProjectSettingsExtension.cpp" />
+    <ClCompile Include="src\ppSessionActionsCreator.cpp" />
+    <ClCompile Include="src\ppSessionController.cpp" />
+    <ClCompile Include="src\ppSessionNavigationChart.cpp" />
+    <ClCompile Include="src\ppSessionView.cpp" />
+    <ClCompile Include="src\ppSingletonsDelete.cpp" />
+    <ClCompile Include="src\ppSummaryView.cpp" />
+    <ClCompile Include="src\ppTimeline.cpp" />
+    <ClCompile Include="src\ppTimelineView.cpp" />
+    <ClCompile Include="src\ppTreeHandler.cpp" />
+    <ClCompile Include="src\ppWindowsManagerHelper.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppAppController.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppCountersSelectionDialog.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePlot.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePowerNonStackedPlot.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePowerStackedPlot.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppProjectSettingsExtension.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSessionNavigationChart.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSessionView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSummaryView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppTimelineView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppWindowsManagerHelper.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppCallsPerTypeView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppCallSuggestionsView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFeedbackAnalysisView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppGLTimelineItem.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppHelpTimelineItem.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppLongestRunningFunctionsView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppMenuActionExecutor.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppMultiLinePlot.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppMultiSourceCodeView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppPieChartWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppSessionComparisonView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppShaderAnalysisView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppShadersInRegionView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppSourceCodeView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppVerticalLabel.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppLPGPU2CollectionDefs.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppLPGPU2CounterList.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppLPGPU2MultiRegionOfInterestView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppLPGPU2RegionOfInterestView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ppProjectLPGPU2SettingsExtension.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFeedbackEngineDialog.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFeedbackEngineOptionWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppMultiFrameDetailView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFrameDetailView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFrameAPICallTable.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFrameCounterSummaryTable.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFrameTimeline.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppInfoWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppCallsPerTypeView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppCallSuggestionsView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackAnalysisView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackEngineDialog.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackEngineOptionWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameAPICallTable.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameCounterSummaryTable.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameDetailView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameTimeline.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppGLTimelineItem.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppHelpTimelineItem.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppInfoWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppLongestRunningFunctionsView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiFrameDetailView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiLinePlot.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiSourceCodeView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppPieChartWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSessionComparisonView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppShaderAnalysisView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppShadersInRegionView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppVerticalLabel.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2CounterList.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2MultiRegionOfInterestView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2RegionOfInterestView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppProjectLPGPU2SettingsExtension.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppTimeline.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppTimelineItem.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppTimelineItem.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppRunFeedbackEngineShortcutFrame.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppRunFeedbackEngineShortcutFrame.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppTimerTimingModeFrame.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppTimerTimingModeFrame.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFrameTerminatorSelectionWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameTerminatorSelectionWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppADBCommands.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppADBCommands.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppADBCommandsExecutor.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppADBCommandsExecutor.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppFlushDataDialogWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFlushDataDialogWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppAppsListWidget.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppAppsListWidget.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppSourceCodeWithSplitView.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeWithSplitView.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppSourceCodeTreeModel.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeTreeModel.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LPGPU2ppInstallAPKDialog.cpp">
+      <Filter>LPGPU2</Filter>
+    </ClCompile>
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppInstallAPKDialog.cpp">
+      <Filter>Generated</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Backend\AMDTPowerProfileAPI\src\ppCountersStringConstants.h" />
+    <ClInclude Include="Include\ppAMDTPowerProfilingDLLBuild.h" />
+    <ClInclude Include="Include\ppAppWrapper.h" />
+    <ClInclude Include="Include\ppStringConstants.h" />
+    <ClInclude Include="src\ppAidFunctions.h" />
+    <ClInclude Include="src\ppColoredBarGraphData.h" />
+    <ClInclude Include="src\ppColors.h" />
+    <ClInclude Include="src\ppCountersSortOrder.h" />
+    <ClInclude Include="src\ppDataUtils.h" />
+    <ClInclude Include="src\ppGUIDefs.h" />
+    <ClInclude Include="src\ppMenuActionsExecutor.h" />
+    <ClInclude Include="src\ppSessionActionsCreator.h" />
+    <ClInclude Include="src\ppSessionController.h" />
+    <ClInclude Include="src\ppSingletonsDelete.h" />
+    <ClInclude Include="src\ppStackedBarGraphData.h" />
+    <ClInclude Include="src\ppTreeHandler.h" />
+    <ClInclude Include="src\ppMDIViewCreator.h" />
+    <ClInclude Include="Include\LPGPU2_DurationMode.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LPGPU2ppFnStatus.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LPGPU2ppMenuActionExecutor.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LPGPU2ppUtils.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ppLPGPU2CollectionDefs.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ppLPGPU2CollectionDefs.h">
+      <Filter>LPGPU2</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\..\..\..\Common\Src\qcustomplot\1.3.1\qcustomplot.h" />
+    <CustomBuild Include="src\ppAppController.h" />
+    <CustomBuild Include="src\ppSessionView.h" />
+    <CustomBuild Include="src\ppTimelineView.h" />
+    <CustomBuild Include="Include\ppWindowsManagerHelper.h" />
+    <CustomBuild Include="src\ppCountersSelectionDialog.h" />
+    <CustomBuild Include="src\ppSessionNavigationChart.h" />
+    <CustomBuild Include="src\ppSessionNavigationChart.h" />
+    <CustomBuild Include="src\ppMultiLinePlot.h" />
+    <CustomBuild Include="src\ppMultiLinePowerStackedPlot.h" />
+    <CustomBuild Include="src\ppSummaryView.h" />
+    <CustomBuild Include="src\ppTimeline.h" />
+    <CustomBuild Include="src\ppProjectSettingsExtension.h" />
+    <CustomBuild Include="src\ppMultiLinePowerNonStackedPlot.h" />
+    <CustomBuild Include="src\LPGPU2ppCallsPerTypeView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppCallSuggestionsView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackAnalysisView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppGLTimelineItem.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppHelpTimelineItem.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppLongestRunningFunctionsView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppMultiLinePlot.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppMultiSourceCodeView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppPieChartWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSessionComparisonView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppShaderAnalysisView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppShadersInRegionView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppVerticalLabel.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\ppLPGPU2RegionOfInterestView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\ppLPGPU2CounterList.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\ppLPGPU2MultiRegionOfInterestView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\ppProjectLPGPU2SettingsExtension.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackEngineDialog.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackEngineOptionWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppMultiFrameDetailView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameAPICallTable.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameDetailView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameCounterSummaryTable.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameTimeline.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppInfoWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppTimelineItem.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppRunFeedbackEngineShortcutFrame.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppTimerTimingModeFrame.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameTerminatorSelectionWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppADBCommands.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppADBCommandsExecutor.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFlushDataDialogWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppAppsListWidget.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeWithSplitView.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeTreeModel.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppInstallAPKDialog.h">
+      <Filter>LPGPU2</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Generated">
+      <UniqueIdentifier>{70f45b40-ad4c-4e41-b6a6-ad91ed881f6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="LPGPU2">
+      <UniqueIdentifier>{c25a8dfa-2e61-410e-8331-14b1832de864}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

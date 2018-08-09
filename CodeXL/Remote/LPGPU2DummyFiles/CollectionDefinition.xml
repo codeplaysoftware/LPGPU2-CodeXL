@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf8" ?>
+<Collection>
+	<Timeline Enable="0" />
+	<CounterSet Enable="0" Id="8194">
+		<Counter Enable="0" Id="4149" />
+		<Counter Enable="0" Id="4150" />
+		<Counter Enable="0" Id="4151" />
+		<Counter Enable="0" Id="4152" />
+		<Counter Enable="0" Id="4153" />
+		<Counter Enable="0" Id="4154" />
+		<Counter Enable="0" Id="4155" />
+		<Counter Enable="0" Id="4156" />
+		<Counter Enable="0" Id="4157" />
+		<Counter Enable="0" Id="4158" />
+		<Counter Enable="0" Id="4159" />
+		<Counter Enable="0" Id="4160" />
+		<Counter Enable="0" Id="4161" />
+		<Counter Enable="0" Id="4162" />
+		<Counter Enable="0" Id="4163" />
+		<Counter Enable="0" Id="4164" />
+		<Counter Enable="0" Id="4165" />
+		<Counter Enable="0" Id="4166" />
+		<Counter Enable="0" Id="4167" />
+		<Counter Enable="0" Id="4168" />
+		<Counter Enable="0" Id="4169" />
+		<Counter Enable="0" Id="4170" />
+		<Counter Enable="0" Id="4171" />
+		<Counter Enable="0" Id="4172" />
+		<Counter Enable="0" Id="4173" />
+		<Counter Enable="0" Id="4174" />
+		<Counter Enable="0" Id="4175" />
+		<Counter Enable="0" Id="4176" />
+	</CounterSet>
+	<CounterSet Enable="0" Id="8193">
+		<Counter Enable="0" Id="4117" />
+		<Counter Enable="0" Id="4118" />
+		<Counter Enable="0" Id="4119" />
+		<Counter Enable="0" Id="4120" />
+		<Counter Enable="0" Id="4121" />
+		<Counter Enable="0" Id="4122" />
+		<Counter Enable="0" Id="4123" />
+		<Counter Enable="0" Id="4124" />
+		<Counter Enable="0" Id="4125" />
+		<Counter Enable="0" Id="4126" />
+		<Counter Enable="0" Id="4127" />
+		<Counter Enable="0" Id="4128" />
+		<Counter Enable="0" Id="4129" />
+		<Counter Enable="0" Id="4130" />
+		<Counter Enable="0" Id="4131" />
+		<Counter Enable="0" Id="4132" />
+		<Counter Enable="0" Id="4133" />
+		<Counter Enable="0" Id="4134" />
+		<Counter Enable="0" Id="4135" />
+		<Counter Enable="0" Id="4136" />
+		<Counter Enable="0" Id="4137" />
+		<Counter Enable="0" Id="4138" />
+		<Counter Enable="0" Id="4139" />
+		<Counter Enable="0" Id="4140" />
+		<Counter Enable="0" Id="4141" />
+		<Counter Enable="0" Id="4142" />
+		<Counter Enable="0" Id="4143" />
+		<Counter Enable="0" Id="4144" />
+		<Counter Enable="0" Id="4145" />
+		<Counter Enable="0" Id="4146" />
+		<Counter Enable="0" Id="4147" />
+		<Counter Enable="0" Id="4148" />
+	</CounterSet>
+	<CounterSet Enable="1" Id="8192">
+		<Counter Enable="1" Id="4096" />
+		<Counter Enable="1" Id="4097" />
+		<Counter Enable="1" Id="4098" />
+		<Counter Enable="1" Id="4099" />
+		<Counter Enable="1" Id="4100" />
+		<Counter Enable="1" Id="4101" />
+		<Counter Enable="1" Id="4102" />
+		<Counter Enable="1" Id="4103" />
+		<Counter Enable="1" Id="4104" />
+		<Counter Enable="1" Id="4105" />
+		<Counter Enable="1" Id="4106" />
+		<Counter Enable="1" Id="4107" />
+		<Counter Enable="1" Id="4108" />
+		<Counter Enable="1" Id="4109" />
+		<Counter Enable="1" Id="4110" />
+		<Counter Enable="1" Id="4111" />
+		<Counter Enable="1" Id="4112" />
+		<Counter Enable="1" Id="4113" />
+		<Counter Enable="1" Id="4114" />
+		<Counter Enable="1" Id="4115" />
+		<Counter Enable="1" Id="4116" />
+	</CounterSet>
+	<Compressed Enable="0" />
+	<FrameCapture Enable="0" />
+	<DumpCallstack Enable="0" />
+	<GPUTiming Enable="0" />
+	<CaptureShaders Enable="0" />
+	<CommandNames DefaultOverride="" />
+	<Config Name="NumberedBufferSize" Value="10000" />
+	<Config Name="DcapiIntervalHz" Value="58823" />
+	<Config Name="LogLevel" Value="Default" />
+	<Config Name="DataDirectory" Value="" />
+	<Config Name="StatsWriteThreshold" Value="-1" />
+	<Process Name="com.example.lpgpu2.lpgpu2rclient" />
+	<CollectionRange StartDraw="-1" StartFrame="-1" StopDraw="-1" StopFrame="-1" />
+</Collection>

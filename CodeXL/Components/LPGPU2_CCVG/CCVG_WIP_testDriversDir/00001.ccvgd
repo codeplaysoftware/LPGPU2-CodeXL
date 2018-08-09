@@ -1,0 +1,47 @@
+1. Used Trollect Qt
+
+2. GUI programming
+	Scale of data, performance, and GUI response
+	Threading
+	
+3. What features did your tools do to be:
+	stable
+    ensure correct behaviour
+	aid traceability
+	
+4. Used design patterns
+	data view model
+	how to do undo
+	
+5. Windows programming
+
+6. Scripting
+	What did you use
+	Why what purpose
+
+7. Release process
+	Ensure traceability
+	Documentation
+	Build process
+		Build systems
+	
+8. Size of the programme base
+	How to ensure modularity
+	Coding style
+	Team
+	
+9. How would handle importing different file formats/versions to one common interface
+	How to handle new unknown versions/format and keep backward compatibility 
+
+10. Who do you programme for
+	What is good code
+	Portable code
+	Standard template library
+		Vector and list
+		
+11. Memory manager for OpenCL
+	Hardwired or generic to OpenCL library
+	How integrated to use with OpenCL
+	Memory performance strategy
+	
+12. 

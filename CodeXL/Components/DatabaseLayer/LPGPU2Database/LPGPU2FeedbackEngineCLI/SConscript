@@ -1,0 +1,67 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+programName = "LPGPU2FeedbackEngineCLI-bin"
+
+env = CXL_env.Clone()
+
+UseBoost(env)
+
+env.Append( CPPPATH = [
+  "/usr/local/lib/",
+  ".",
+  "../",
+  "../../",
+  env['CXL_commonproj_dir'],
+  env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+  env['CXL_common_dir'] + '/Src/sqlite/3.9.2/',
+  env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",
+
+])
+
+resources = \
+[
+    "LinuxResources/LPGPU2FeedbackEngineCLI"
+]
+
+env.Append(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLProfilerDAL",
+  "CXLDbAdapter",
+  "libboost_program_options",
+  "libpthread",
+  "libsqlite",
+  "liblua",
+  "LPGPU2Database",
+  "LPGPU2FeedbackEngine",
+  "LPGPU2InputOutput"
+])
+
+# Create the sources list with the files for the CLI
+sources = \
+[
+  "LPGPU2FeedbackEngineCLI.cpp",
+]
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+# Creating the executable
+programFiles = env.Program(
+  target = programName,
+  source = objFiles)
+
+# Installing libraries
+programInstall = env.Install(
+  dir = env['CXL_lib_dir'],
+  source = (programFiles))
+
+# Installing the launch script libraries
+programInstall += env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (resources))
+
+Return('programInstall')

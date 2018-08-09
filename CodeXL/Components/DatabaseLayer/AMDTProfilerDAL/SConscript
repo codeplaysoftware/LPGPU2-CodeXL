@@ -1,0 +1,49 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "CXLProfilerDAL"
+
+env = CXL_env.Clone()
+
+env.Append( CPPPATH = [ 
+	".",
+   	"../",
+	"../../", #Support relocate from CommonProjects and keep includes path formats
+	"./include",
+	"./src/",
+	env['CXL_commonproj_dir'],
+	env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+	env['CXL_common_dir'] + '/Src/sqlite/3.9.2/'
+])
+
+sources = \
+[
+    "src/dbTxCommitThread.cpp",
+    "src/AMDTDatabaseAccessor.cpp",
+]
+
+env.Prepend(LIBS = [
+	"CXLBaseTools",
+	"CXLOSWrappers",
+    "libpthread",
+    #++KB: LPGPU2
+    "libsqlite"
+    #--KB: LPGPU2
+])
+
+# Creating object files	
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+soFiles = env.SharedLibrary(
+	target = libName, 
+	source = objFiles)
+
+# Installing libraries
+libInstall = env.Install( 
+	dir = env['CXL_lib_dir'], 
+	source = (soFiles))
+
+Return('libInstall')

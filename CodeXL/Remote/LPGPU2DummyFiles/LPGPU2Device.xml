@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ The MIT License
+
+ Copyright (c) 2016 Samsung Electronics Co., Ltd. All Rights Reserved
+ For conditions of distribution and use, see the accompanying COPYING file.
+
+-->
+<Collection>
+<Config Name="EglPath"   Value="libEGL.so"/>
+<Config Name="Gles2Path" Value="libGLESv2.so"/>
+<Config Name="Gles3Path" Value="libGLESv2.so"/>
+<Config Name="ClPath" Value="libOpenCL.so"/>
+<!-- Config Name="DataDirectory" Value=""/ Note: This field is inserted from the command line or collector task xml -->
+<Config Name="LogLevel" Value="Default"/>
+</Collection>

@@ -1,0 +1,510 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{94C28338-2EF8-4E26-8375-A93A68FE8146}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>AMDTPowerProfiling</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(SolutionDir)\AMDTPowerProfiling.props" />
+    <Import Project="$(AMDTCommonExt)\qcustomplot\Global-qcustomplot.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(CommonDir)\Src\TSingleton\Global-TSingleton.props" />
+  </ImportGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PreprocessorDefinitions>AMDTPOWERPROFILING_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)\..\Remote;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>CXLApplicationComponents$(GDTProjectSuffix).lib;CXLApiClasses$(GDTProjectSuffix).lib;CXLSharedProfiling$(GDTProjectSuffix).lib;CXLPowerProfilingMidTier$(GDTProjectSuffix).lib;CXLDbAdapter$(GDTProjectSuffix).lib;CXLProfilerDAL$(GDTProjectSuffix).lib;CXLRemoteClient$(GDTProjectSuffix).lib;CXLCpuProfiling$(GDTProjectSuffix).lib;LPGPU2PowerModeling$(GDTProjectSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="src\LPGPU2ppVerticalLabel.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="..\..\..\..\Common\Src\qcustomplot\1.3.1\qcustomplot.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "$(COMMONDIR)\Src\qcustomplot\1.3.1\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="..\Backend\AMDTPowerProfileAPI\src\ppCountersStringConstants.h" />
+    <ClInclude Include="Include\LPGPU2_DurationMode.h" />
+    <ClInclude Include="Include\ppAMDTPowerProfilingDLLBuild.h" />
+    <ClInclude Include="Include\ppAppWrapper.h" />
+    <ClInclude Include="Include\ppStringConstants.h" />
+    <CustomBuild Include="src\ppAppController.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppSessionView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppTimelineView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Include\ppWindowsManagerHelper.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation %(Filename)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation %(Filename)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppLPGPU2CounterList.h">
+      <FileType>CppCode</FileType>
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppGLTimelineItem.h">
+      <FileType>CppCode</FileType>
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppCallsPerTypeView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackAnalysisView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackEngineDialog.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFeedbackEngineOptionWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppADBCommands.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppADBCommandsExecutor.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFlushDataDialogWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppAppsListWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\LPGPU2ppFnStatus.h" />
+    <CustomBuild Include="src\LPGPU2ppMultiLinePlot.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppPieChartWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppLongestRunningFunctionsView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppCallSuggestionsView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppShadersInRegionView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppShaderAnalysisView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameDetailView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameAPICallTable.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameCounterSummaryTable.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameTimeline.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppInfoWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppFrameTerminatorSelectionWidget.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppInstallAPKDialog.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\LPGPU2ppMenuActionExecutor.h" />
+    <CustomBuild Include="src\LPGPU2ppSessionComparisonView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppMultiFrameDetailView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppTimelineItem.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppRunFeedbackEngineShortcutFrame.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppTimerTimingModeFrame.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeWithSplitView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeTreeModel.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\LPGPU2ppUtils.h" />
+    <ClInclude Include="src\ppAidFunctions.h" />
+    <ClInclude Include="src\ppColoredBarGraphData.h" />
+    <ClInclude Include="src\ppColors.h" />
+    <ClInclude Include="src\ppCountersSortOrder.h" />
+    <ClInclude Include="src\ppDataUtils.h" />
+    <CustomBuild Include="src\ppCountersSelectionDialog.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppGUIDefs.h" />
+    <CustomBuild Include="src\ppSessionNavigationChart.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppMultiLinePlot.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppHelpTimelineItem.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppLPGPU2CollectionDefs.h" />
+    <CustomBuild Include="src\ppLPGPU2RegionOfInterestView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppLPGPU2MultiRegionOfInterestView.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppMenuActionsExecutor.h" />
+    <CustomBuild Include="src\ppMultiLinePowerStackedPlot.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppProjectLPGPU2SettingsExtension.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation %(Filename)</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation %(Filename)</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppSessionActionsCreator.h" />
+    <ClInclude Include="src\ppSessionController.h" />
+    <ClInclude Include="src\ppSingletonsDelete.h" />
+    <CustomBuild Include="src\LPGPU2ppMultiSourceCodeView.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\LPGPU2ppSourceCodeView.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppStackedBarGraphData.h" />
+    <CustomBuild Include="src\ppSummaryView.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppTimeline.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="src\ppTreeHandler.h" />
+    <ClInclude Include="src\ppMDIViewCreator.h" />
+    <CustomBuild Include="src\ppProjectSettingsExtension.h">
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="src\ppMultiLinePowerNonStackedPlot.h">
+      <FileType>CppCode</FileType>
+      <Command>"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "src\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message>moc creation %(Filename)</Message>
+      <Outputs>tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs>$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\LPGPU2ppADBCommands.cpp" />
+    <ClCompile Include="src\LPGPU2ppADBCommandsExecutor.cpp" />
+    <ClCompile Include="src\LPGPU2ppCallsPerTypeView.cpp" />
+    <ClCompile Include="src\LPGPU2ppCallSuggestionsView.cpp" />
+    <ClCompile Include="src\LPGPU2ppFeedbackAnalysisView.cpp" />
+    <ClCompile Include="src\LPGPU2ppFeedbackEngineDialog.cpp" />
+    <ClCompile Include="src\LPGPU2ppFeedbackEngineOptionWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppFlushDataDialogWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppAppsListWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppFrameAPICallTable.cpp" />
+    <ClCompile Include="src\LPGPU2ppFrameCounterSummaryTable.cpp" />
+    <ClCompile Include="src\LPGPU2ppFrameDetailView.cpp" />
+    <ClCompile Include="src\LPGPU2ppFrameTerminatorSelectionWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppFrameTimeline.cpp" />
+    <ClCompile Include="src\LPGPU2ppGLTimelineItem.cpp" />
+    <ClCompile Include="src\LPGPU2ppInfoWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppInstallAPKDialog.cpp" />
+    <ClCompile Include="src\LPGPU2ppLongestRunningFunctionsView.cpp" />
+    <ClCompile Include="src\LPGPU2ppMenuActionExecutor.cpp" />
+    <ClCompile Include="src\LPGPU2ppMultiFrameDetailView.cpp" />
+    <ClCompile Include="src\LPGPU2ppMultiLinePlot.cpp" />
+    <ClCompile Include="src\LPGPU2ppPieChartWidget.cpp" />
+    <ClCompile Include="src\LPGPU2ppRunFeedbackEngineShortcutFrame.cpp" />
+    <ClCompile Include="src\LPGPU2ppSourceCodeTreeModel.cpp" />
+    <ClCompile Include="src\LPGPU2ppSourceCodeWithSplitView.cpp" />
+    <ClCompile Include="src\LPGPU2ppTimerTimingModeFrame.cpp" />
+    <ClCompile Include="src\LPGPU2ppSessionComparisonView.cpp" />
+    <ClCompile Include="src\LPGPU2ppShaderAnalysisView.cpp" />
+    <ClCompile Include="src\LPGPU2ppShadersInRegionView.cpp" />
+    <ClCompile Include="src\LPGPU2ppTimelineItem.cpp" />
+    <ClCompile Include="src\ppAidFunctions.cpp" />
+    <ClCompile Include="src\ppAppController.cpp" />
+    <ClCompile Include="src\ppAppWrapper.cpp" />
+    <ClCompile Include="src\ppColors.cpp" />
+    <ClCompile Include="src\ppCountersSelectionDialog.cpp" />
+    <ClCompile Include="src\ppCountersSortOrder.cpp" />
+    <ClCompile Include="src\ppDataUtils.cpp" />
+    <ClCompile Include="src\ppLPGPU2CollectionDefs.cpp" />
+    <ClCompile Include="src\ppLPGPU2CounterList.cpp" />
+    <ClCompile Include="src\ppLPGPU2MultiRegionOfInterestView.cpp" />
+    <ClCompile Include="src\ppLPGPU2RegionOfInterestView.cpp" />
+    <ClCompile Include="src\ppMDIViewCreator.cpp" />
+    <ClCompile Include="src\ppMenuActionsExecutor.cpp" />
+    <ClCompile Include="src\ppMultiLinePlot.cpp" />
+    <ClCompile Include="src\ppProjectLPGPU2SettingsExtension.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppCallsPerTypeView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppCallSuggestionsView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackAnalysisView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackEngineDialog.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFeedbackEngineOptionWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameAPICallTable.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameCounterSummaryTable.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameDetailView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameTimeline.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppInfoWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppLongestRunningFunctionsView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiFrameDetailView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiLinePlot.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppPieChartWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSessionComparisonView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppShaderAnalysisView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppShadersInRegionView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2CounterList.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2MultiRegionOfInterestView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppLPGPU2RegionOfInterestView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppProjectLPGPU2SettingsExtension.cpp" />
+    <ClCompile Include="src\LPGPU2ppHelpTimelineItem.cpp" />
+    <ClCompile Include="src\LPGPU2ppVerticalLabel.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppGLTimelineItem.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppHelpTimelineItem.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppMultiSourceCodeView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppVerticalLabel.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppTimeline.cpp" />
+    <ClCompile Include="src\ppMultiLinePowerNonStackedPlot.cpp" />
+    <ClCompile Include="src\ppMultiLinePowerStackedPlot.cpp" />
+    <ClCompile Include="src\ppProjectSettingsExtension.cpp" />
+    <ClCompile Include="src\ppSessionActionsCreator.cpp" />
+    <ClCompile Include="src\ppSessionController.cpp" />
+    <ClCompile Include="src\ppSessionNavigationChart.cpp" />
+    <ClCompile Include="src\ppSessionView.cpp" />
+    <ClCompile Include="src\ppSingletonsDelete.cpp" />
+    <ClCompile Include="src\LPGPU2ppMultiSourceCodeView.cpp" />
+    <ClCompile Include="src\LPGPU2ppSourceCodeView.cpp" />
+    <ClCompile Include="src\ppSummaryView.cpp" />
+    <ClCompile Include="src\ppTimeline.cpp" />
+    <ClCompile Include="src\ppTimelineView.cpp" />
+    <ClCompile Include="src\ppTreeHandler.cpp" />
+    <ClCompile Include="src\ppWindowsManagerHelper.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppAppController.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppCountersSelectionDialog.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePlot.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePowerNonStackedPlot.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppMultiLinePowerStackedPlot.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppProjectSettingsExtension.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSessionNavigationChart.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSessionView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppSummaryView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppTimelineView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_ppWindowsManagerHelper.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppTimelineItem.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppRunFeedbackEngineShortcutFrame.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppTimerTimingModeFrame.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFrameTerminatorSelectionWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppADBCommands.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppADBCommandsExecutor.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppFlushDataDialogWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppAppsListWidget.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeWithSplitView.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppSourceCodeTreeModel.cpp" />
+    <ClCompile Include="tmp\moc_$(Platform)$(Configuration)\moc_LPGPU2ppInstallAPKDialog.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

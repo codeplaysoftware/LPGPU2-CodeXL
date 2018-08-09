@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# This script build all Linux projects.
+commandLineArgs=$*
+
+# Usage: buildCodeXLFullLinuxProjects [scons arguments]
+
+if [ -z "$AMD_CODEXL" ]; then
+	# Absolute path to build script, e.g. $workspace/main/CodeXL/Util/linux/buildCodeXLFullLinuxProjects.sh
+	BUILDSCRIPT=$(readlink -f "$0")
+	# Absolute path this script directory is in, thus p4localfiles/devtools/main/CodeXL/Util/linux/
+	SCRIPTFOLDER=$(dirname "$BUILDSCRIPT")
+	# Set AMD_CODEXL folder path in current workspace
+	AMD_CODEXL=$(readlink -e "${SCRIPTFOLDER}/../../")
+fi
+echo "AMD_CODEXL dir = ${AMD_CODEXL}"
+
+NUM_ERRORS=0
+checkforerror ()
+{
+	RC=$?
+	if [ ${RC} -ne 0 ]
+	then
+		echo "*** ERROR during the build of this subcomponent ***"
+	fi
+
+	echo "========================================== "
+	echo "----------- End building ----------------- "
+	date
+	echo "========================================== "
+
+	NUM_ERRORS=`expr ${NUM_ERRORS} + ${RC}`
+	if [ ${NUM_ERRORS} -ne 0 ]
+	then
+		echo "*** ERROR ***"
+		echo "*** the build failed - see the logs for details ***"
+		exit 1
+	else
+		echo "*** SUCCESS ***" 
+	fi
+}
+
+# Display a start message:
+echo 
+echo 
+echo "Building all Linux projects"
+echo "==========================="
+echo "Build arguments passed to scons: $commandLineArgs"
+
+if [ -n "$BASH" ]; then
+    set -o pipefail
+fi
+
+# AMD_OUTPUT should be set by parent script
+if [ "x${AMD_OUTPUT}x" = "xx" ]
+then
+    # If not, it means this script was invoked by unknown means.
+    export AMD_OUTPUT=${AMD_CODEXL}/../
+fi
+
+echo
+echo
+echo "========================================== "
+echo "----------- Start building --------------- "
+echo "cd ${AMD_CODEXL}"
+cd ${AMD_CODEXL}
+echo "scons CXL_common_dir=${AMD_CODEXL}/../Common CXL_prefix=$AMD_OUTPUT $commandLineArgs"
+echo "script folder: ${SCRIPTFOLDER}"
+date
+echo "========================================== "
+
+eval "scons -C ${AMD_CODEXL} CXL_common_dir=${AMD_CODEXL}/../Common CXL_prefix=$AMD_OUTPUT $commandLineArgs | perl $AMD_CODEXL/Util/linux/BuildFilter.pl"
+checkforerror
+
+exit 0

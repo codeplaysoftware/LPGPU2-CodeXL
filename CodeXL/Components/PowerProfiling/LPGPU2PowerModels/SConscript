@@ -1,0 +1,15 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+env = CXL_env.Clone()
+
+pwrModelsFileName = "LPGPU2PowerModels.xml"
+
+# Installing file
+fileInstall = env.Install( 
+    dir = env['CXL_lib_dir'], 
+    source = (pwrModelsFileName))
+
+Return('fileInstall')

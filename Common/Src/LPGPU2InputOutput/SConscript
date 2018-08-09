@@ -1,0 +1,48 @@
+# -*- Python -*-
+
+from CXL_init import *
+Import('*')
+
+
+libName = "LPGPU2InputOutput"
+
+env = CXL_env.Clone()
+
+env.Append(CPPFLAGS = '-std=c++11')
+env.Append( CPPPATH = [
+        ".",
+        "./Include/",
+        env['CXL_commonproj_dir'],
+        env['CXL_commonproj_dir'] + '/../../CodeXL',
+])
+
+sources = \
+[
+        "src/LPGPU2_io_CSVFileBase.cpp",
+        "src/LPGPU2_io_CSVFileWriter.cpp",
+        "src/LPGPU2_io_CSVRow.cpp"
+]
+
+# Creating object files
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+statFiles = env.StaticLibrary(
+        target = libName,
+        source = objFiles)
+install = statFiles
+
+if env['CXL_build_type'] != 'static':
+        # Creating shared libraries
+        soFiles = env.SharedLibrary(
+                target = libName,
+                source = objFiles
+        )
+        install += soFiles
+
+# Installing libraries
+libInstall = env.Install(
+        dir = env['CXL_lib_dir'],
+        source = (install))
+
+Return('libInstall')

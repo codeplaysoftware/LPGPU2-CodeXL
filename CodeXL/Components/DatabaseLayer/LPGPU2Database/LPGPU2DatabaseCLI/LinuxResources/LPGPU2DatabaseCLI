@@ -1,0 +1,57 @@
+#!/bin/bash
+
+# This script requires bash. Do not remove the above shebang line!
+
+# ----------------------------------------------------------------------------------------------------------------------------------
+# File name: LPGPU2DbDemo
+# This script sets LPGPU2DbDemo's related environment variables and
+# launches the LPGPU2DbDemo binary executable.
+#
+# /// Copyright (C) 2002-2017 Codeplay Software Limited. All Rights Reserved.
+# ----------------------------------------------------------------------------------------------------------------------------------
+
+# Get this script full path:
+if echo "$0" | grep '^/' ; then
+	thisScriptFullPath="$0"
+else
+	thisScriptFullPath=`pwd`/$0
+fi
+
+# Enable the use of symbolic links to the script
+if [ -h ${thisScriptFullPath} ]
+then
+    LINKTARGET=`readlink -f "$thisScriptFullPath"`
+    thisScriptFullPath=${LINKTARGET}
+fi
+
+# LPGPU2DbDemo's binaries directory is this scripts directory:
+LPGPU2DatabaseCLIBinariesDir=`dirname "$thisScriptFullPath"`
+LPGPU2DatabaseCLIQTLibsDir="${LPGPU2DatabaseCLIBinariesDir}/RuntimeLibs/QT"
+
+# Calculate CodeXL's binary executable path:
+LPGPU2DbDemoBinaryExePath="${LPGPU2DatabaseCLIBinariesDir}/LPGPU2DatabaseCLI-bin"
+
+# Obtain libstdc++ needed version
+LDCONFIG="ldconfig"
+command -v "$LDCONFIG" &> /dev/null || LDCONFIG="/sbin/ldconfig"
+CRUNTIMEPATH=$(${LDCONFIG} -p | grep libstdc++.so.6 | grep 64)
+CRUNTIMEFILE=${CRUNTIMEPATH##*>}
+
+# Test if current system C++ runtime is older from CodeXL version needed
+CXL_CLIB=""
+NEWCRUNTIME=$(strings $CRUNTIMEFILE | grep GLIBCXX_3.4.16)
+if [ -z "$NEWCRUNTIME" ];then
+    # System C++ runtime is older from CodeXL
+    CXL_CLIB="${LPGPU2DatabaseCLIBinariesDir}/RuntimeLibs/x86_64"
+fi
+
+
+# Add CodeXL's binaries directory to LD_LIBRARY_PATH:
+if [ -z "$LD_LIBRARY_PATH" ]; then
+	export LD_LIBRARY_PATH="${LPGPU2DatabaseCLIBinariesDir}:${CXL_CLIB}:${LPGPU2DatabaseCLIQTLibsDir}"
+else
+	export LD_LIBRARY_PATH="${LPGPU2DatabaseCLIBinariesDir}:${CXL_CLIB}:${LPGPU2DatabaseCLIQTLibsDir}:$LD_LIBRARY_PATH"
+fi
+# Run CodeXL:
+eval "$LPGPU2DbDemoBinaryExePath $@"
+

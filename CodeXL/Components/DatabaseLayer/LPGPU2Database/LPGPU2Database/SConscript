@@ -1,0 +1,55 @@
+#++AT:LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "LPGPU2Database"
+
+env = CXL_env.Clone()
+
+env.Append( CPPPATH = [
+  ".",
+  "../",
+  "../../",
+  env['CXL_commonproj_dir'],
+  env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+  env['CXL_common_dir'] + '/Src/sqlite/3.9.2/',
+  env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",
+  env['CXL_commonproj_dir'] + "/../../CodeXL/Remote/",
+
+])
+
+# Create the sources list with only the files necessary for the library
+sources = \
+[
+  "LPGPU2_db_DatabaseAccessor.cpp",
+  "LPGPU2_db_DatabaseAdapter.cpp",
+  "LPGPU2_db_DatabaseUtils.cpp"
+]
+
+env.Prepend(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLProfilerDAL",
+  "CXLDbAdapter",
+  "LPGPU2InputOutput",
+  "libpthread",
+  "libsqlite"
+])
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+# Creating the shared libraries
+soFiles = env.SharedLibrary(
+  target = libName,
+  source = objFiles)
+
+# Installing libraries
+libInstall = env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (soFiles))
+
+Return('libInstall')
+#--AT:LPGPU2

@@ -1,0 +1,135 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+appName = "CodeXLRemoteAgent-bin"
+
+env = CXL_env.Clone()
+UseBoost(env)
+UseAPPSDK(env)
+
+#++AT:LPGPU2
+env.Append( CPPPATH = [ 
+    ".",
+    "./Public Include/",
+    env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+    env['CXL_commonproj_dir'],
+    env['CXL_commonproj_dir'] + '/../../CodeXL/Remote',    
+    env['CXL_commonproj_dir'] + "/AMDTOSAPIWrappers/Include",
+])
+
+if (env['CXL_arch'] != 'armv7a' and env['CXL_arch'] != 'aarch64'):
+  env.Append(CPPPATH = [
+    env['CXL_commonproj_dir'] +"/../../CodeXL/Components/PowerProfiling/Backend/",
+    env['CXL_commonproj_dir'] +"/../../CodeXL/Components/PowerProfiling/Backend/AMDTPowerProfileAPI/inc/",
+  ])
+#--AT:LPGPU2
+
+# osMessageBox, osDesktop
+env.Append(CPPFLAGS = '-fno-strict-aliasing')
+
+UseGtk(env)
+UseTinyXml(env)
+
+#++AT:LPGPU2
+sources = \
+[
+    "./dmnConfigManager.cpp",
+    "./Daemon.cpp",
+    "./dmnSessionThread.cpp",
+    "./dmnUtils.cpp",
+    "./dmnThreadObserver.cpp",
+    "./dmnServerThreadConfig.cpp",
+    "./dmnServerThread.cpp",
+    "./dmnConnectionWatcherThread.cpp",
+    "./IThreadEventObserver.cpp",
+    "./dmnAppWatcherThread.cpp",
+]
+
+if (env['CXL_arch'] != 'armv7a' and env['CXL_arch'] != 'aarch64'):
+  sources.append("./dmnPowerBackendAdapter.cpp")
+#--AT:LPGPU2
+    
+# Creating object files    
+objFiles = env.SharedObject(sources)
+
+otherResources = \
+[
+    "./CodeXLRemoteAgent",
+    "./CodeXLRemoteAgentConfig.xml",
+]
+
+linkerFlags = []
+
+#++AT:LPGPU2
+if (env['CXL_arch'] in ['x64','x86_64']):
+  env.Append( LIBPATH = [
+      "/usr/lib",
+      env['CXL_common_dir'] + "/Lib/Ext/zlib/1.2.8/bin/x64/ZlibStatRelease/"
+  ])
+elif (env['CXL_arch'] == 'x86'):
+  env.Append( LIBPATH = [
+      "/usr/lib",
+      env['CXL_common_dir'] + "/Lib/Ext/zlib/1.2.8/bin/x86/ZlibStatRelease/"
+  ])
+elif (env['CXL_arch'] == 'armv7a'):
+  env.Append( LIBPATH = [
+      "/usr/lib",
+      env['CXL_common_dir'] + "/Lib/Ext/zlib/1.2.8/bin/armv7a/ZlibStatRelease/",
+      env['CXL_common_dir'] + "/Lib/Ext/X11/armv7a/"
+  ])
+elif (env['CXL_arch'] == 'aarch64'):
+  env.Append( LIBPATH = [
+      "/usr/lib",
+      env['CXL_common_dir'] + "/Lib/Ext/zlib/1.2.8/bin/aarch64/ZlibStatRelease/",
+      env['CXL_common_dir'] + "/Lib/Ext/X11/aarch64/"
+  ])
+
+env.Append (LIBS = [
+    "libXdmcp",
+    "libXau",
+    "libxcb",
+    "libX11"
+])
+#--AT:LPGPU2
+
+#++AT:LPGPU2
+env.Append (LIBS = [
+    "CXLOSWrappers",
+    "CXLBaseTools",
+    "CXLOSAPIWrappers",
+    "libz",
+    "libpthread",
+    "libboost_regex",
+    "libboost_filesystem",
+    "libboost_wave",
+    "libboost_system",
+    "libboost_thread",
+    "libboost_date_time",
+    "libboost_chrono"
+])
+
+if (env['CXL_arch'] != 'armv7a' and env['CXL_arch'] != 'aarch64'):
+  env.Append(LIBS = [
+    "CXLPowerProfileAPI"
+  ])
+#--AT:LPGPU2
+
+# Creating executable
+exe = env.Program(
+	target = appName, 
+    source = sources,
+	LINKFLAGS = linkerFlags)
+
+# Installing libraries
+libInstall = env.Install( 
+    dir = env['CXL_bin_dir'], 
+    source = (exe))
+
+# Install additional items - shell script, config file, etc.
+libInstall += env.Install(
+    dir = env['CXL_bin_dir'], 
+    source = (otherResources))
+
+Return('libInstall')

@@ -1,0 +1,154 @@
+# -*- Python -*-
+
+from CXL_init import *
+
+Import('*')
+
+libName = "LPGPU2_CCVGCodeCoverage"
+
+env = CXL_env.Clone()
+
+ccvg_project_folder = env['CXL_common_dir'] + '/../CodeXL/Components/LPGPU2_CCVG'
+ccvg_plugin_folder = os.path.join(ccvg_project_folder, 'CCVGCodeCoveragePlugin')
+
+env.Append(CPPFLAGS = ' -std=c++11')
+env.Append( CPPPATH = [
+    ".",
+    "..",
+    "../..",
+    env['CXL_commonproj_dir'],
+    env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+    env['CXL_common_dir'] + '/../CodeXL',
+    env['CXL_common_dir'] + '/../CodeXL/Components',
+    ccvg_project_folder,
+])
+
+UseQt4(env)
+UseTinyXml(env)
+UseQCustomPlot(env)
+UseQScintilla(env)
+
+sources = [
+    'src/CCVGAppWrapper.cpp',
+    'src/CCVGClassCmnBase.cpp',
+    'src/CCVGExecutionMode.cpp',
+    'src/CCVGResourcesIcon.cpp',
+    'src/CCVGResourcesString.cpp',
+    'src/CCVGResourcesColor.cpp',
+    'src/CCVG_cmd_CmdBase.cpp',
+    'src/CCVG_cmd_CmdBaseWithParams.cpp',
+    'src/CCVG_cmd_CmdProjectClose.cpp',
+    'src/CCVG_cmd_CmdProjectNew.cpp',
+    'src/CCVG_cmd_CmdProjectSettingsDlgOpen.cpp',
+    'src/CCVG_cmd_CmdFileRead.cpp',
+    'src/CCVG_cmd_CmdFilesReadAll.cpp',
+    'src/CCVG_cmd_CmdFilesReadDrivers.cpp',
+    'src/CCVG_cmd_CmdFilesReadExecuteable.cpp',
+    'src/CCVG_cmd_CmdFilesReadResults.cpp',
+    'src/CCVG_cmd_CmdFilesReadSource.cpp',
+    'src/CCVG_cmd_CmdProjDataSetNoDriverFilesReq.cpp',
+    'src/CCVG_cmd_CmdsGlobalFns.cpp',
+    'src/CCVG_cmd_CmdSwitchCCVGMode.cpp',
+    'src/CCVG_cmd_CmdWndSrcOpen.cpp',
+    'src/CCVG_cmd_Factory.cpp',
+    'src/CCVG_cmd_Invoker.cpp',
+    'src/CCVG_cmd_Params.cpp',
+    'src/CCVG_cmd_RegisterAll.cpp',
+    'src/CCVG_cmn_CCVGHighlight.cpp',
+    'src/CCVG_cmn_CCVGItemDataBase.cpp',
+    'src/CCVG_cmn_CCVGItemDataDriver.cpp',
+    'src/CCVG_cmn_CCVGItemDataExecuteable.cpp',
+    'src/CCVG_cmn_CCVGItemDataResults.cpp',
+    'src/CCVG_cmn_CCVGItemDataSource.cpp',
+    'src/CCVG_cmn_LLVMCovMapReader.cpp',
+    'src/CCVG_cmn_LLVMResultTextReader.cpp',
+    'src/CCVG_cmn_LLVMCoverageHighlighter.cpp',
+    'src/CCVG_cmn_LLVMFunctionResult.cpp',
+    'src/CCVG_cmn_LLVMFunctionSummary.cpp',
+    'src/CCVG_cmn_LLVMFunctionCovMap.cpp',
+    'src/CCVG_cmn_LLVMMapping.cpp',
+    'src/CCVG_fw_AppTreeDataExtn.cpp',
+    'src/CCVG_fw_EventObserver.cpp',
+    'src/CCVG_fw_MDIGeneralActionsCreator.cpp',
+    'src/CCVG_fw_MDIViewBase.cpp',
+    'src/CCVG_fw_MDIViewCreator.cpp',
+    'src/CCVG_fw_MenuActionsExecutor.cpp',
+    'src/CCVG_fw_TheCurrentState.cpp',
+    'src/CCVG_fw_TheCurrentStateProjectSettings.cpp',
+    'src/CCVG_fw_TheCurrentStateProjectData.cpp',
+    'src/CCVG_fw_TheCurrentStateProjectDataCcvg.cpp',
+    'src/CCVG_fw_TheCurrentStateCurrentPCUser.cpp',
+    'src/CCVG_fw_MDIViewFactory.cpp',
+    'src/CCVG_fw_MDIViewId.cpp',
+    'src/CCVG_fw_MDIViewMgr.cpp',
+    'src/CCVG_fw_MDIViewRegisterAll.cpp',
+    'src/CCVG_fw_MDIViewSourceCodeNonEdit.cpp',
+    'src/CCVG_gui_AppTreeHandler.cpp',
+    'src/CCVG_gui_ProjectSettings.cpp',
+    'src/CCVG_gui_TabPageSettings.cpp',
+    'src/CCVG_gui_ToolbarMainWnd.cpp',
+    'src/CCVG_gui_WidgetStringConstants.cpp',
+    'src/CCVG_util_File.cpp',
+    'src/CCVG_util_Functions.cpp',
+    'src/CCVG_util_MsgDlg.cpp',
+    'src/CCVG_util_VariantType.cpp',
+    'src/CCVG_wgt_GroupBoxHideTooltipOverChild.cpp',
+    'src/CCVG_wgt_LineEdit.cpp'
+]
+
+moc_files = [
+    'Include/CCVG_fw_AppTreeDataExtn.h',
+    'Include/CCVG_gui_AppTreeHandler.h',
+    'Include/CCVG_gui_ProjectSettings.h',
+    'Include/CCVG_gui_TabPageSettings.h',
+    'Include/CCVG_gui_ToolbarMainWnd.h',
+    'Include/CCVG_wgt_GroupBoxHideTooltipOverChild.h',
+    'Include/CCVG_wgt_LineEdit.h'
+]
+
+# Generates the Qt Moc files
+MOC_Generated = [env.MocBld(moc_file) for moc_file in moc_files]
+
+dependencies = [
+    "CXLApplicationFramework",
+    "CXLBaseTools",
+    "CXLOSWrappers",
+    "CXLExecutableFormat"
+]
+
+ccvg_should_build = env['LPGPU2_BUILD_CCVG']
+
+if ccvg_should_build:
+    env.Append(LIBS=dependencies)
+
+    # Creating object files
+    objFiles = env.SharedObject(sources)
+
+    # Creating shared libraries
+    soFiles = env.SharedLibrary(
+            target = libName,
+            source = objFiles + MOC_Generated)
+
+    # Installing libraries
+    libInstall = env.Install(
+            dir = env['CXL_lib_dir'],
+            source = (soFiles))
+
+    # 1. List the files in the resources (res) folder
+    welcome_folder = os.path.join(ccvg_plugin_folder, 'res', 'Welcome')
+    welcome_folder = os.path.abspath(welcome_folder)
+    res_file_names = os.listdir(welcome_folder)
+
+    # 2. Process the filenames in order to obtain a filepath
+    res_file_path_list = [os.path.join(welcome_folder, res_file_name) for res_file_name in res_file_names]
+
+    # 3. Obtain the HTML directory to where to copy the resource files
+    CodeXLHTMLDir = env['CXL_HTML_dir']
+
+    # 4. Add each file to the libInstall list so they can be copied
+    libInstall += [env.Install(CodeXLHTMLDir, res_file_path) for res_file_path in res_file_path_list]
+
+    Return('libInstall')
+
+else:
+    Return()

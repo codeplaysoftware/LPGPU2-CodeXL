@@ -1,0 +1,386 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{DA1B1843-5EA8-41C5-9E9D-19E1DBEA72B9}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectName>LPGPU2_CCVGCodeCoverage</ProjectName>
+    <RootNamespace>LPGPU2_CCVGCodeCoverage</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0.10586.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v140</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(SolutionDir)\LPGPU2_CCVGCodeCoverage.props" />
+    <Import Project="$(AMDTCommonAMD)\APPSDK\Global-OpenCL-NoLib.props" />
+    <Import Project="$(CommonDir)\Lib\Ext\QScintilla\Global-QScintilla.props" />
+    <Import Project="$(CommonDir)\Lib\Ext\Qt\Global-QT.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="..\..\..\..\Common\Lib\Ext\tinyxml\Global-TinyXML-2015.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="..\..\..\..\Common\Lib\Ext\tinyxml\Global-TinyXML-2015.props" />
+  </ImportGroup>
+  <PropertyGroup>
+    <OutDir>$(AMDTOutputDir)$(Configuration)\bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <CustomBuildAfterTargets>
+    </CustomBuildAfterTargets>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(AMDTCommonExt)tinyxml\2.6.2;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>QT_NO_OPENGL;QT_LARGEFILE_SUPPORT;QT_DLL;QT_GUI_LIB;QT_CORE_LIB;QT_THREAD_SUPPORT;LPGPU2_CCVG_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>CXLBaseTools$(GDTProjectSuffix).lib;CXLOSWrappers$(GDTProjectSuffix).lib;CXLOSAPIWrappers$(GDTProjectSuffix).lib;CXLApiClasses$(GDTProjectSuffix).lib;CXLApplicationComponents$(GDTProjectSuffix).lib;CXLApplicationFramework$(GDTProjectSuffix).lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CopyFiles_AnyConfiguration_LPGPU2.bat 1 Debug</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">CopyFiles_AnyConfiguration_LPGPU2.bat 1 Debug</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Copying LPGPU2 CCVG welcome page graphics to bin output directory</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Copying LPGPU2 CCVG welcome page graphics to bin output directory</Message>
+    </PostBuildEvent>
+    <PostBuildEvent>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Copying LPGPU2 CCVG welcome page graphics to bin output directory</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Copying LPGPU2 CCVG welcome page graphics to bin output directory</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">CopyFiles_AnyConfiguration_LPGPU2.bat 1 Release</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">CopyFiles_AnyConfiguration_LPGPU2.bat 1 Release</Command>
+    </PostBuildEvent>
+    <CustomBuildStep>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">if not exist Include/CCVGProjectBuildDefinitions_Generated.h (
+    call Disable_CCVGBuild.bat
+)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Message>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </TreatOutputAsContent>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">if not exist Include/CCVGProjectBuildDefinitions_Generated.h (
+    call Disable_CCVGBuild.bat
+)</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Message>
+      <TreatOutputAsContent Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </TreatOutputAsContent>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </Outputs>
+    </CustomBuildStep>
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">if not exist Include/CCVGProjectBuildDefinitions_Generated.h call Disable_CCVGBuild.bat</Command>
+    </PreBuildEvent>
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">if not exist Include/CCVGProjectBuildDefinitions_Generated.h call Disable_CCVGBuild.bat</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ResourceCompile Include="$(CommonProjectsDir)\VersionInfo\VersionResource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\CCVGAppWrapper.cpp" />
+    <ClCompile Include="src\CCVGClassCmnBase.cpp" />
+    <ClCompile Include="src\CCVGExecutionMode.cpp" />
+    <ClCompile Include="src\CCVGResourcesIcon.cpp" />
+    <ClCompile Include="src\CCVGResourcesString.cpp" />
+    <ClCompile Include="src\CCVGResourcesColor.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdBase.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdBaseWithParams.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFileRead.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadAll.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadDrivers.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadExecuteable.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadResults.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdFilesReadSource.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdProjDataSetNoDriverFilesReq.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdProjectClose.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdProjectNew.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdProjectSettingsDlgOpen.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdWndSrcOpen.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdsGlobalFns.cpp" />
+    <ClCompile Include="src\CCVG_cmd_CmdSwitchCCVGMode.cpp" />
+    <ClCompile Include="src\CCVG_cmd_Factory.cpp" />
+    <ClCompile Include="src\CCVG_cmd_Invoker.cpp" />
+    <ClCompile Include="src\CCVG_cmd_Params.cpp" />
+    <ClCompile Include="src\CCVG_cmd_RegisterAll.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataExecuteable.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMCoverageHighlighter.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMCovMapReader.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionCovMap.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionResult.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMFunctionSummary.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMMapping.cpp" />
+    <ClCompile Include="src\CCVG_cmn_LLVMResultTextReader.cpp" />
+    <ClCompile Include="src\CCVG_fw_AppTreeDataExtn.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGHighlight.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataBase.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataDriver.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataResults.cpp" />
+    <ClCompile Include="src\CCVG_cmn_CCVGItemDataSource.cpp" />
+    <ClCompile Include="src\CCVG_fw_EventObserver.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIGeneralActionsCreator.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewBase.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewCreator.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewFactory.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewId.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewMgr.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewRegisterAll.cpp" />
+    <ClCompile Include="src\CCVG_fw_MDIViewSourceCodeNonEdit.cpp" />
+    <ClCompile Include="src\CCVG_fw_MenuActionsExecutor.cpp" />
+    <ClCompile Include="src\CCVG_fw_TheCurrentState.cpp" />
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateCurrentPCUser.cpp" />
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectData.cpp" />
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectDataCcvg.cpp" />
+    <ClCompile Include="src\CCVG_fw_TheCurrentStateProjectSettings.cpp" />
+    <ClCompile Include="src\CCVG_gui_AppTreeHandler.cpp" />
+    <ClCompile Include="src\CCVG_gui_ProjectSettings.cpp" />
+    <ClCompile Include="src\CCVG_gui_TabPageSettings.cpp" />
+    <ClCompile Include="src\CCVG_gui_ToolbarMainWnd.cpp" />
+    <ClCompile Include="src\CCVG_gui_WidgetStringConstants.cpp" />
+    <ClCompile Include="src\CCVG_util_File.cpp" />
+    <ClCompile Include="src\CCVG_util_Functions.cpp" />
+    <ClCompile Include="src\CCVG_util_MsgDlg.cpp" />
+    <ClCompile Include="src\CCVG_util_VariantType.cpp" />
+    <ClCompile Include="src\CCVG_wgt_ButtonDirFolder.cpp" />
+    <ClCompile Include="src\CCVG_wgt_GroupBoxHideTooltipOverChild.cpp" />
+    <ClCompile Include="src\CCVG_wgt_LineEdit.cpp" />
+    <ClCompile Include="src\dllmain.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_fw_AppTreeDataExtn.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_AppTreeHandler.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_ProjectSettings.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_TabPageSettings.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_gui_ToolbarMainWnd.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_wgt_GroupBoxHideTooltipOverChild.cpp" />
+    <ClCompile Include="tmp\moc_Win32Debug\moc_CCVG_wgt_LineEdit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Include\CCVGAppWrapper.h" />
+    <ClInclude Include="Include\CCVGClassCmnBase.h" />
+    <ClInclude Include="Include\CCVGDataTypes.h" />
+    <ClInclude Include="Include\CCVGDLLBuild.h" />
+    <ClInclude Include="Include\CCVGExecutionMode.h" />
+    <CustomBuild Include="Include\CCVGProjectBuildDefinitions.h">
+      <Command>
+      if not exist Include\CCVGProjectBuildDefinitions_Generated.h (
+        call Disable_CCVGBuild.bat
+      )
+      </Command>
+      <Message>Cheking if CCVGProjectBuildDefinitions_Generated.h exists</Message>
+      <AdditionalInputs>Disable_CCVGBuild.bat</AdditionalInputs>
+      <Outputs>Include\CCVGProjectBuildDefinitions_Generated.h</Outputs>
+    </CustomBuild>
+    <ClInclude Include="Include\CCVGResourcesIcon.h" />
+    <ClInclude Include="Include\CCVGResourcesString.h" />
+    <ClInclude Include="Include\CCVGResourcesColor.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdBase.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdBaseWithParams.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFileRead.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadAll.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadDrivers.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadExecuteable.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadResults.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdFilesReadSource.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdIDs.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdProjDataSetNoDriverFilesReq.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectClose.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectNew.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdProjectSettingsDlgOpen.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdSwitchCCVGMode.h" />
+    <ClInclude Include="Include\CCVG_cmd_CmdWndSrcOpen.h" />
+    <ClInclude Include="Include\CCVG_cmd_Factory.h" />
+    <ClInclude Include="Include\CCVG_cmd_Invoker.h" />
+    <ClInclude Include="Include\CCVG_cmd_Parameter.h" />
+    <ClInclude Include="Include\CCVG_cmd_Params.h" />
+    <ClInclude Include="Include\CCVG_cmd_RegisterAll.h" />
+    <CustomBuild Include="Include\CCVG_fw_AppTreeDataExtn.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Include\CCVG_cmn_CCVGHighlight.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGHighlightType.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataBase.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataDriver.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataEnumTypes.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataExecuteable.h" />
+    <ClInclude Include="Include\CCVG_cmn_CCVGItemDataSource.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMCoverageHighlighter.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMCovMapReader.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionCovMap.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionResult.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMFunctionSummary.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMMapping.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMRegionExprType.h" />
+    <ClInclude Include="Include\CCVG_cmn_LLVMResultTextReader.h" />
+    <ClInclude Include="Include\CCVG_fw_CommandIDs.h" />
+    <ClInclude Include="Include\CCVG_fw_EventObserver.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewBase.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewEnumTypes.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewFactory.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewId.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewMgr.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewRegisterAll.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewSourceCodeNonEdit.h" />
+    <ClInclude Include="Include\CCVG_fw_TheCurrentState.h" />
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateCurrentPCUser.h" />
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectData.h" />
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectDataCcvg.h" />
+    <ClInclude Include="Include\CCVG_util_File.h" />
+    <ClInclude Include="Include\CCVG_util_MsgDlg.h" />
+    <ClInclude Include="Include\CCVG_wgt_ButtonDirFolder.h" />
+    <CustomBuild Include="Include\CCVG_wgt_GroupBoxHideTooltipOverChild.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_wgt_LineEdit.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_TabPageSettings.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <CustomBuild Include="Include\CCVG_gui_ProjectSettings.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Include\CCVG_fw_TheCurrentStateProjectSettings.h" />
+    <CustomBuild Include="Include\CCVG_gui_AppTreeHandler.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Include\CCVG_util_Functions.h" />
+    <ClInclude Include="Include\CCVG_util_SingletonBase.h" />
+    <ClInclude Include="Include\CCVG_util_VariantType.h" />
+    <CustomBuild Include="Include\CCVG_gui_ToolbarMainWnd.h">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(AMDTCommonExt)QT\5.5\bin\moc.exe" "Include\%(Filename).h" -o "tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp"</Command>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">moc creation</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">moc creation</Message>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">tmp\moc_$(Platform)$(Configuration)\moc_%(Filename).cpp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(AMDTCommonExt)QT\5.5\bin\moc.exe;src\%(Filename).cpp</AdditionalInputs>
+    </CustomBuild>
+    <ClInclude Include="Include\CCVG_fw_MDIGeneralActionsCreator.h" />
+    <ClInclude Include="Include\CCVG_fw_MDIViewCreator.h" />
+    <ClInclude Include="Include\CCVG_fw_MenuActionsExecutor.h" />
+    <ClInclude Include="Include\CCVG_gui_WidgetStringConstants.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Readme.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Include\CCVG_cmn_CCVGItemDataResults.h" />
+    <None Include="CopyFiles_AnyConfiguration_LPGPU2.bat" />
+    <None Include="Disable_CCVGBuild.bat" />
+    <None Include="Enable_CCVGBuild.bat" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

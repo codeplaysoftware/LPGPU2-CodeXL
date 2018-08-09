@@ -1,0 +1,67 @@
+#++KB: LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "pcre"
+
+env = CXL_env.Clone()
+
+# Remove the c++ flag for the env_no_c11 library
+fullBuildFlags = env['CPPFLAGS']
+partBuildString = fullBuildFlags.replace('-std=c++11', '')
+env.Replace(CPPFLAGS = partBuildString)
+
+env.Append(CPPFLAGS = ' -DHAVE_CONFIG_H')
+env.Append(CPPFLAGS = ' -DPCRE_STATIC')
+
+pcre_version = '8.41'
+
+env.Append( CPPPATH = [ 
+	".",
+    "./pcre-" + pcre_version,
+	env['CXL_common_dir'] + '/Src/pcre/pcre-' + pcre_version
+])
+
+sources = \
+[
+    'pcre_byte_order.c',
+    'pcre_chartables.c',
+    'pcre_compile.c',
+    'pcre_config.c',
+    'pcre_dfa_exec.c',
+    'pcre_exec.c',
+    'pcre_fullinfo.c',
+    'pcre_get.c',
+    'pcre_globals.c',
+    'pcre_jit_compile.c',
+    'pcre_maketables.c',
+    'pcre_newline.c',
+    'pcre_ord2utf8.c',
+    'pcre_refcount.c',
+    'pcre_string_utils.c',
+    'pcre_study.c',
+    'pcre_tables.c',
+    'pcre_ucd.c',
+    'pcre_valid_utf8.c',
+    'pcre_version.c',
+    'pcre_xclass.c'    
+]
+
+sources = ['pcre-' + pcre_version + '/' + source_file for source_file in sources]
+
+# Creating object files	
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+soFiles = env.StaticLibrary(
+	target = libName, 
+	source = objFiles)
+
+# Installing libraries
+libInstall = env.Install( 
+	dir = env['CXL_lib_dir'], 
+	source = (soFiles))
+
+Return('libInstall')

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<AutoVisualizer xmlns="http://schemas.microsoft.com/vstudio/debugger/natvis/2010">
+  <Type Name="gtString">
+    <DisplayString>{_impl}</DisplayString>
+  </Type>
+  <Type Name="osPortAddress">
+    <DisplayString>Host={_hostName}, Port={_portNumber}</DisplayString>
+  </Type>
+  <Type Name="osFilePath">
+    <DisplayString>Path={_fileFullPathString}</DisplayString>
+  </Type>
+  <Type Name="osFile">
+    <DisplayString>{_filePath}</DisplayString>
+  </Type>
+  <Type Name="osDirectory">
+    <DisplayString>{_directoryPath}</DisplayString>
+  </Type>
+</AutoVisualizer>

@@ -1,0 +1,73 @@
+# -*- Python -*-
+Import('*')
+from CXL_init import *
+
+programName = "LPGPU2PowerModelsCLI-bin"
+
+env = CXL_env.Clone()
+
+env.Append(CPPPATH = [
+    "./",
+    "./..",
+    "./inc",
+    env['CXL_commonproj_dir'],
+    env['CXL_commonproj_dir'] + "/AMDTOSAPIWrappers/Include",
+    env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+    env['CXL_commonproj_dir'] + '/../../CodeXL',
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/PowerProfiling/",
+    env['CXL_commonproj_dir'] + "/../../CodeXL/Components/PowerProfiling/MiddleTier",
+])
+
+UseBoost(env)
+UseGtk(env)
+UseTinyXml(env)
+UseQScintilla(env)
+UseQt4(env)
+UseQCustomPlot(env)
+
+env.Append(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLProfilerDAL",
+  "CXLDbAdapter",
+  "LPGPU2InputOutput",
+  "LPGPU2Database",
+  "LPGPU2FeedbackEngine",
+  "libboost_program_options",
+  "libpthread",
+  "libsqlite",
+  "liblua",
+  "CXLOSAPIWrappers",
+  "CXLAPIClasses",
+  "CXLApplicationComponents",
+  "CXLProfilerDAL",
+  "CXLPowerProfileAPI",
+  "CXLRemoteClient",
+  "CXLPowerProfilingMidTier",
+  "LPGPU2PowerModelsBase",
+])
+
+resources = [
+  "LinuxResources/LPGPU2PowerModelsCLI"
+]
+
+# Create the sources list with the files for the CLI
+sources = [
+  "LPGPU2PowerModelsCLI.cpp",
+]
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+# Creating the executable
+programFiles = env.Program(
+  target = programName,
+  source = objFiles)
+
+# Installing libraries
+programInstall = env.Install(
+  dir = env['CXL_lib_dir'],
+  source = (programFiles + resources))
+
+Return('programInstall')

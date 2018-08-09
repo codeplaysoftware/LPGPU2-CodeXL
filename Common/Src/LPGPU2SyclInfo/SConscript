@@ -1,0 +1,60 @@
+# -*- Python -*-
+
+import imp
+from CXL_init import *
+Import('*')
+
+libName = "LPGPU2SyclInfo"
+
+env = CXL_env.Clone()
+
+setup_computecpp_script = os.path.abspath(os.path.join(env['CXL_commonproj_dir'], os.pardir, "Lib", "Ext", "ComputeCpp", "SetupComputeCpp.py"))
+
+if not os.path.exists(setup_computecpp_script):
+    print("{} not found.".format(setup_computecpp_script))
+    exit(1)
+
+setup_computecpp = imp.load_source("", setup_computecpp_script)
+computecpp_folder, _ = setup_computecpp.get_computecpp_folder_and_version(full_path=True)
+
+env.Append(CPPFLAGS = '-std=c++11')
+env.Append( CPPPATH = [
+    env['CXL_commonproj_dir'],
+    os.path.join(computecpp_folder, "include"),
+    env['CXL_commonproj_dir'] + '/../../CodeXL',
+])
+
+UseAPPSDK(env)
+
+sources = [
+    "LPGPU2_sycl_DevicesInfo.cpp"
+]
+
+# Creating object files
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+statFiles = env.StaticLibrary(
+        target = libName,
+        source = objFiles)
+install = statFiles
+
+if env['CXL_build_type'] != 'static':
+        # Creating shared libraries
+        soFiles = env.SharedLibrary(
+                target = libName,
+                source = objFiles
+        )
+        install += soFiles
+
+env.Prepend(LIBS = ("libComputeCpp.so"))
+
+# Installing libraries
+libInstall = env.Install(
+        dir = env['CXL_lib_dir'],
+        source = (install))
+
+computecpp_lib = os.path.join(computecpp_folder, 'lib/libComputeCpp.so')
+libInstall += env.Install(env['CXL_lib_dir'], computecpp_lib)
+
+Return('libInstall')

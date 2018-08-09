@@ -1,0 +1,79 @@
+#++KB: LPGPU2
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "lua"
+
+env = CXL_env.Clone()
+
+# Remove the c++ flag for the env_no_c11 library
+fullBuildFlags = env['CPPFLAGS']
+partBuildString = fullBuildFlags.replace('-std=c++11', '')
+env.Replace(CPPFLAGS = partBuildString)
+
+env.Append(CPPFLAGS=" -DLUA_USE_LINUX")
+env.Append(CPPFLAGS=" -Wl,-E -ldl -lreadline -fPIC")
+
+lua_version = '5.3.4'
+
+env.Append( CPPPATH = [ 
+	".",    	
+	env['CXL_common_dir'] + '/Src/lua/' + lua_version
+])
+
+sources = \
+[
+    'lobject.c',
+    'lstring.c',
+    'lvm.c',
+    'lutf8lib.c',
+    'ltm.c',
+    'lcorolib.c',
+    'loslib.c',
+    'lzio.c',
+    'lbitlib.c',
+    'lcode.c',
+    'lmem.c',
+    'ltablib.c',
+    'ldblib.c',
+    'lmathlib.c',
+    'lstate.c',
+    'ldump.c',
+    'ldo.c',
+    'luac.c',
+    'linit.c',
+    'loadlib.c',
+    'lbaselib.c',
+    'liolib.c',
+    'lgc.c',
+    'llex.c',
+    'lctype.c',
+    'lundump.c',    
+    'lstrlib.c',
+    'lopcodes.c',
+    'ldebug.c',
+    'lauxlib.c',
+    'lapi.c',
+    'ltable.c',
+    'lparser.c',
+    'lfunc.c'
+]
+
+sources = [lua_version + '/src/' + source_file for source_file in sources]
+
+# Creating object files	
+objFiles = env.SharedObject(sources)
+
+# Creating shared libraries
+soFiles = env.SharedLibrary(
+	target = libName, 
+	source = objFiles)
+
+# Installing libraries
+libInstall = env.Install( 
+	dir = env['CXL_lib_dir'], 
+	source = (soFiles))
+
+Return('libInstall')

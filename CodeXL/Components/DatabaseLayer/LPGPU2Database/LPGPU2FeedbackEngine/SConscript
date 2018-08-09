@@ -1,0 +1,60 @@
+# -*- Python -*-
+
+Import('*')
+from CXL_init import *
+
+libName = "LPGPU2FeedbackEngine"
+
+env = CXL_env.Clone()
+
+env.Append( CPPPATH = [
+  ".",
+  "../",
+  "../../",
+  env['CXL_commonproj_dir'],
+  env['CXL_commonproj_dir'] + '/AMDTCommonHeaders/',
+  env['CXL_common_dir'] + '/Src/sqlite/3.9.2/',
+  env['CXL_common_dir'] + '/Src/lua/5.3.4/src',
+  env['CXL_commonproj_dir'] + "/../../CodeXL/Components/DatabaseLayer/",  
+])
+
+# Create the sources list with only the files necessary for the library
+sources = \
+[
+  "LPGPU2_db_FeedbackEngine.cpp",
+  "LPGPU2_db_FeedbackEnginePreProcessor.cpp",
+]
+
+env.Prepend(LIBS = [
+  "CXLBaseTools",
+  "CXLOSWrappers",
+  "CXLProfilerDAL",
+  "CXLDbAdapter",
+  "LPGPU2InputOutput",
+  "LPGPU2Database",
+  "libpthread",
+  "libsqlite",
+  "liblua"
+])
+
+# Creating object the files
+objFiles = env.SharedObject(sources)
+
+# Creating the shared libraries
+soFiles = env.SharedLibrary(
+  target = libName,
+  source = objFiles)
+
+# Installing libraries
+libInstall = env.Install(
+    dir = env['CXL_lib_dir'],
+    source = (soFiles))
+
+scripts_dir = env['CXL_lib_dir'] + '/LPGPU2_scripts'
+
+# Installing the lua scripts
+libInstall += env.Install(
+    dir = scripts_dir,
+    source = ('LPGPU2FeedbackScript.lua', 'LPGPU2ShaderStatsTestScript.lua'))
+
+Return('libInstall')
