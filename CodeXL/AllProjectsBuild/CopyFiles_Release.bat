@@ -39,5 +39,5 @@ XCopy /r /d /y "..\..\Common\Lib\Ext\qcustomplot\1.3.1\lib\Win32\%CONFIG_NAME%\q
 
 :: ++TLRS: LPGPU2: Copy the debug version of the ComputeCpp runtime version to CodeXL's output folder.
 :: TODO: Read the version of ComputeCpp from a configuration variable
-XCopy /r /d /y "..\..\Common\Lib\Ext\ComputeCpp\ComputeCpp-CE-0.9.1-Windows-x86_64-Raw\lib\ComputeCpp_vs2015.dll" "..\Output\%CONFIG_NAME%\bin\"
+XCopy /r /d /y "..\..\Common\Lib\Ext\ComputeCpp\ComputeCpp-CE-0.9.1-Win64\lib\ComputeCpp_vs2015.dll" "..\Output\%CONFIG_NAME%\bin\"
 :: --TLRS: LPGPU2: Copy the debug version of the ComputeCpp runtime version to CodeXL's output folder.
