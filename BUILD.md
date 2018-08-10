@@ -88,8 +88,7 @@ sudo apt install openjdk-8-jdk-headless
 * If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL/Output_x86_64/bin`
 
 ##### Building the experimental ComputeCpp Profiler
-* Download **ComputeCpp** from [Codeplay's developer website]
-(https://developer.codeplay.com/computecppce/latest/overview)
+* Download **ComputeCpp** from [Codeplay's developer website](https://developer.codeplay.com/computecppce/latest/overview)
 * Extract the content in the folder `LPGPU2-CodeXL/Common/Lib/Ext/ComputeCpp`.
 * SCons will take care of finding ComputeCpp as long as it is extracted in the specified location.
 
