@@ -32,8 +32,7 @@ CodeXL Build Instructions
 * If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL\CodeXL\Output\Release\bin\CodeXL.exe`.
 
 ##### Building the experimental ComputeCpp Profiler
-* Download **ComputeCpp** from [Codeplay's developer website]
-(https://developer.codeplay.com/computecppce/latest/overview)
+* Download **ComputeCpp** from [Codeplay's developer website](https://developer.codeplay.com/computecppce/latest/overview)
 * Extract the content in the folder `LPGPU2-CodeXL/Common/Lib/Ext/ComputeCpp`.
 * Rename the extracted folder to `ComputeCpp-CE-0.9.1-Win64`.
 * Double-click the script `SetupComputeCpp.bat`.
