@@ -9,8 +9,11 @@ CodeXL Build Instructions
 * [Windows 10 SDK Version 10.0.10586.0](https://developer.microsoft.com/en-us/windows/downloads/sdk-archive)
 * [Java Development Kit - JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Python 2.7 or newer](https://www.python.org/downloads/)
+* [Android ADB](https://developer.android.com/studio/releases/platform-tools)
 
 > CodeXL requires JDK for CPU Profiling support of Java applications and the build may fail on Linux machines if JDK is not found in the system.
+
+> LPGPU<sup>2</sup> CodeXL uses ADB to communicate with Android devices in order to start or stop the Remote Agent that runs on the application. ADB is not strictly required but it greatly simplifies the profiling experience.
 
 ### Building CodeXL on Windows
 
