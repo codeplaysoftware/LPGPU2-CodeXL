@@ -10,16 +10,22 @@ CodeXL Build Instructions
 * [Java Development Kit - JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 * [Python 2.7 or newer](https://www.python.org/downloads/)
 * [Android ADB](https://developer.android.com/studio/releases/platform-tools)
+* [ComputeCpp CE 1.0.0](https://developer.codeplay.com/computecppce/latest/download)
 
 > CodeXL requires JDK for CPU Profiling support of Java applications and the build may fail on Linux machines if JDK is not found in the system.
 
 > LPGPU<sup>2</sup> CodeXL uses ADB to communicate with Android devices in order to start or stop the Remote Agent that runs on the application. ADB is not strictly required but it greatly simplifies the profiling experience.
 
 ### Building CodeXL on Windows
-
 * Download and install the required software as listed in [Prerequisites](#prerequisites).
 * Clone the LPGPU<sup>2</sup> CodeXL repository.
     * `https://github.com/codeplaysoftware/LPGPU2-CodeXL.git`
+* Go to the folder `Common/Lib/Ext/ComputeCpp` and execute the script `SetupComputeCpp.bat`.
+    - This will generate the file `ComputeCpp-Version.props`, which is required by the project `LPGPU2SyclInfo`.
+* **Optional**: Enabling build of CCVGCodeCoverage
+    * The build of the   **CCVGCodeCoverage** execution mode is disabled by default. In order to enabled it, perform the following steps:
+        * Go to the folder ```CodeXL\Components\LPGPU2_CCVG\CCVGCodeCoveragePlugin```
+        * Double click on the script ```Enable_CCVGBuild.bat```
 * Open the solution with **Visual Studio 2015**: `LPGPU2-CodeXL\CodeXL\AllProjectsBuild\CodeXL-AllProjects.sln`
   * In the Solution Explorer, right-click on the `CodeXL-AllProjects` solution and select `Properties`.
     * Open `Common Properties > Startup Project`.
@@ -29,21 +35,7 @@ CodeXL Build Instructions
   * You *must build CodeXL for the Win32 platform before you can build it for the x64 platform*.
     * The Win32 build creates `CodeXL(-d).lib`, which is required for both Win32 and x64 CodeXL to run.
 * Build 64 bit configuration
-* If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL\CodeXL\Output\Release\bin\CodeXL.exe`.
-
-##### Building the experimental ComputeCpp Profiler
-* Download **ComputeCpp** from [Codeplay's developer website](https://developer.codeplay.com/computecppce/latest/overview)
-* Extract the content in the folder `LPGPU2-CodeXL/Common/Lib/Ext/ComputeCpp`.
-* Rename the extracted folder to `ComputeCpp-CE-0.9.1-Win64`.
-* Double-click the script `SetupComputeCpp.bat`.
-* This will generate a file called `ComputeCpp-Global.props` that is required to build CodeXL with SYCL Profiling capabilites.
-
-
-##### Enabling build of CCVGCodeCoverage
-The build of the **CCVGCodeCoverage** execution mode is disabled by default. In order to enabled it, perform the following steps:
-* Go to the folder ```CodeXL\Components\LPGPU2_CCVG\CCVGCodeCoveragePlugin```
-* Double click on the script ```Enable_CCVGBuild.bat```
-* Build the solution again
+* If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL\CodeXL\Output\Release\bin`.
 
 ##### Installing CodeXL Drivers
 After a successful build of CodeXL solution, you can install the drivers that CodeXL uses to power profile PC applications.
@@ -81,15 +73,15 @@ sudo apt install openjdk-8-jdk-headless
 
 - Make sure the environment variable `JAVA_HOME` is defined and pointing a to a valid JDK installation. If `JAVA_HOME` is not defined, the build will fail.
 
-##### Building CodeXL on Linux
-* `cd LPGPU2-CodeXL/CodeXL/Util/linux`
-* `./buildCodeXLFullLinuxProjects CXL_build=release LPGPU2_BUILD_CCVG=True -j8`
-* If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL/Output_x86_64/bin`
-
 ##### Building the experimental ComputeCpp Profiler
 * Download **ComputeCpp** from [Codeplay's developer website](https://developer.codeplay.com/computecppce/latest/overview)
 * Extract the content in the folder `LPGPU2-CodeXL/Common/Lib/Ext/ComputeCpp`.
 * SCons will take care of finding ComputeCpp as long as it is extracted in the specified location.
+
+##### Building CodeXL on Linux
+* `cd LPGPU2-CodeXL/CodeXL/Util/linux`
+* `./buildCodeXLFullLinuxProjects CXL_build=release LPGPU2_BUILD_CCVG=True -j8`
+* If nothing goes wrong, CodeXL binaries will be located in `LPGPU2-CodeXL/Output_x86_64/Debug/bin`
 
 ##### Optional build of the Desktop GPU Backends:
 > In order to use the prototype of [ComputeCpp](https://www.codeplay.com/products/computesuite/computecpp) SYCL Profiler on Linux, this step must be performed:
@@ -128,4 +120,4 @@ The script must be run with root privileges and accepts the following arguments:
 
 ##### Important
 
-> Before attempting to compile CodeXL if not on a clean machine be sure to clean out any previous builds of CodeXL especially if you have tried to build CodeXL with GCC versions not specified below. Calling `buildCodeXLFullLinuxProjects -c` to clean the build is not enough to clear out previously built libraries or object files. Likely the files will be used and not rebuilt. Manually remove the `Output_x68_64` and recompile everything.
+> Before attempting to compile CodeXL if not on a clean machine be sure to clean out any previous builds of CodeXL especially if you have tried to build CodeXL with a compiler other than GCC. Calling `buildCodeXLFullLinuxProjects -c` to clean the build is not enough to clear out previously built libraries or object files. Likely the files will be used and not rebuilt. Manually remove the `Output_x68_64` and recompile everything.
