@@ -87,27 +87,35 @@ PPFnStatus TraceDataPacketParser::ConsumeDataImpl(
   // No need to check as the API calls made by the app are necessarily
   // the ones available and listed in the TargetCharacteristics.xml
   const auto apiInfo = commands.apisLUT.find(apiID);
-  assert(apiInfo != commands.apisLUT.end());
-  const auto cmdInfoPtr = apiInfo->second.cmdsLUT.find(cmdID);
-  assert(cmdInfoPtr != apiInfo->second.cmdsLUT.end());
-  const auto &cmdInfo = cmdInfoPtr->second;
-
-  // Save the data in the database
-  db::ProfileTraceInfo trace = {
-    cmdID,
-    cmdInfo.name,
-    startTime,
-    endTime,
-    frameNumber,
-    drawNumber,
-    apiID,
-    offset,
-    length};
-  auto rcDb = m_pDataAdapter->InsertProfileTraceInfo(trace);
-  if (!rcDb)
+  if (apiInfo != commands.apisLUT.end())
   {
-    return PPFnStatus::failure;
-  }
+	  assert(apiInfo != commands.apisLUT.end());
+	  const auto cmdInfoPtr = apiInfo->second.cmdsLUT.find(cmdID);
+
+	  if (cmdInfoPtr != apiInfo->second.cmdsLUT.end())
+	  {
+		  assert(cmdInfoPtr != apiInfo->second.cmdsLUT.end());
+		  const auto &cmdInfo = cmdInfoPtr->second;
+
+		  // Save the data in the database
+		  db::ProfileTraceInfo trace = {
+			  cmdID,
+			  cmdInfo.name,
+			  startTime,
+			  endTime,
+			  frameNumber,
+			  drawNumber,
+			  apiID,
+			  offset,
+			  length };
+
+		  auto rcDb = m_pDataAdapter->InsertProfileTraceInfo(trace);
+		  if (!rcDb)
+		  {
+			  return PPFnStatus::failure;
+		  }
+	  }	  
+  }   
 
   return PPFnStatus::success;
 }
