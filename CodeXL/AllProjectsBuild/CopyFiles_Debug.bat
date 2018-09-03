@@ -60,5 +60,5 @@ XCopy /r /d /y "..\..\Common\Lib\Ext\qcustomplot\1.3.1\lib\Win32\%CONFIG_NAME%\q
 XCopy /r /d /y "..\..\Common\Lib\Ext\qcustomplot\1.3.1\lib\Win32\%CONFIG_NAME%\qcustomplot%D_SUFFIX%.pdb" "..\Output\%CONFIG_NAME%\bin\"
 
 :: ++TLRS: LPGPU2: Copy the debug version of the ComputeCpp runtime version to CodeXL's output folder.
-XCopy /r /d /y "..\..\Common\Lib\Ext\ComputeCpp\ComputeCpp-CE-0.9.1-Win64\lib\ComputeCpp_vs2015_%D_SUFFIX%.dll" "..\Output\%CONFIG_NAME%\bin\"
+XCopy /r /d /y "..\..\Common\Lib\Ext\ComputeCpp\ComputeCpp-%ComputeCppVersion%\lib\ComputeCpp_vs2015_%D_SUFFIX%.dll" "..\Output\%CONFIG_NAME%\bin\"
 :: --TLRS: LPGPU2: Copy the debug version of the ComputeCpp runtime version to CodeXL's output folder.

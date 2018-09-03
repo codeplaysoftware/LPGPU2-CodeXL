@@ -3,7 +3,7 @@
 /// @file LPGPU2_TraceDataPacketParser.cpp
 ///
 /// @brief Concrete implementation of the BaseDataPacketParser class.
-///        Handles TRACE (Power Prorfiling) data packets.
+///        Handles TRACE (Power Profiling) data packets.
 /// @copyright
 /// Copyright (C) 2002-2018 Codeplay Software Limited. All Rights Reserved.
 
