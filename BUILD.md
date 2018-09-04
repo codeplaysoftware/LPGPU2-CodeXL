@@ -19,7 +19,7 @@ CodeXL Build Instructions
 ### Building CodeXL on Windows
 * Download and install the required software as listed in [Prerequisites](#prerequisites).
 * Clone the LPGPU<sup>2</sup> CodeXL repository.
-    * `https://github.com/codeplaysoftware/LPGPU2-CodeXL.git`
+    * `git clone https://github.com/codeplaysoftware/LPGPU2-CodeXL.git`
 * Go to the folder `Common/Lib/Ext/ComputeCpp` and execute the script `SetupComputeCpp.bat`.
     - This will generate the file `ComputeCpp-Version.props`, which is required by the project `LPGPU2SyclInfo`.
 * **Optional**: Enabling build of CCVGCodeCoverage
