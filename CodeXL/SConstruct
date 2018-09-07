@@ -283,12 +283,14 @@ CXL_env.Depends(LPGPU2FeedbackEngine_Obj, LPGPU2Database_Obj + Lua_Obj + pcre_Ob
 #--KB: LPGPU2
 
 # LPGPU2 Power Model
-LPGPU2PowerModelsBase_Obj = SConscript('Components/PowerProfiling/LPGPU2PowerModeling/LPGPU2PowerModelsBase/SConscript', variant_dir=obj_variant_dir+'/LPGPU2PowerModelsBase', duplicate=1)
+# Only build the Power Model project if it isn't a remote-agent-only-build
+if (CXL_env['CXL_build_only_remote_agent'] == ''):
+    LPGPU2PowerModelsBase_Obj = SConscript('Components/PowerProfiling/LPGPU2PowerModeling/LPGPU2PowerModelsBase/SConscript', variant_dir=obj_variant_dir+'/LPGPU2PowerModelsBase', duplicate=1)
 
-ProfilerCommonPlugins += LPGPU2PowerModelsBase_Obj
+    ProfilerCommonPlugins += LPGPU2PowerModelsBase_Obj
 
-LPGPU2PowerModelsCli_Obj = SConscript('Components/PowerProfiling/LPGPU2PowerModeling/LPGPU2PowerModelsCLI/SConscript', variant_dir=obj_variant_dir+'/LPGPU2PowerModelsCLI', duplicate=1)
-ProfilerCommonPlugins += LPGPU2PowerModelsCli_Obj
+    LPGPU2PowerModelsCli_Obj = SConscript('Components/PowerProfiling/LPGPU2PowerModeling/LPGPU2PowerModelsCLI/SConscript', variant_dir=obj_variant_dir+'/LPGPU2PowerModelsCLI', duplicate=1)
+    ProfilerCommonPlugins += LPGPU2PowerModelsCli_Obj
 
 
 # LPGPU2 Power Model
