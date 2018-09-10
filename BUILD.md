@@ -86,7 +86,7 @@ sudo apt install openjdk-8-jdk-headless
 ##### Optional build of the Desktop GPU Backends:
 > In order to use the prototype of [ComputeCpp](https://www.codeplay.com/products/computesuite/computecpp) SYCL Profiler on Linux, this step must be performed:
 * `cd LPGPU2-CodeXL/Components/GpuProfiling/Build`
-* `./backend_build.sh skip-32bit-build skip-hsaprofiler`
+* `./backend_build.sh skip-32bitbuild skip-hsaprofiler`
 
 ##### Build Switches
 * all SCons general switches, like -c for clean , more info at http://scons.org/doc/HTML/scons-man.html
