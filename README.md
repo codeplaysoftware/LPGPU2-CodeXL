@@ -66,6 +66,14 @@ To encourage 3rd party contribution and adoption, CodeXL is no longer branded as
 
 Refer to [BUILD.md](BUILD.md) for information on building CodeXL from source.
 
+## Enabling the Experimental ComputeCpp© Profiler
+
+In order to enable the experimental ComputeCpp profiler, please download [ComputeCpp from Codeplay's Developer website](https://developer.codeplay.com/computecppce/latest/download) and follow the instructions for your system.
+- **Windows**: Make sure that the directory where ComputeCpp is installed is in the `PATH` environment variable. This can be accomplished by adding the `%COMPUTECPP_ROOT_DIR%/lib` to the `PATH` variable.
+- **Linux**: Make sure that the path to where `libComputeCpp.so` is installed in the environment variable `LD_LIBRARY_PATH` before launching CodeXL.
+
+> To verify that ComputeCpp is enabled, after launching CodeXL, open the **CodeXL System Information** dialog in the menu `Tools/System Information` and select the tab **SYCL Devices**. A list of supported SYCL devices will be displayed in this dialog.
+
 ## Contributors
 
 CodeXL's GitHub repository (http://github.com/GPUOpen-Tools/CodeXL) is moderated by Advanced Micro Devices, Inc. as part of the GPUOpen initiative.
