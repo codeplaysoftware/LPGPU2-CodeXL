@@ -4,7 +4,7 @@
 
 # ----------------------------------------------------------------------------------------------------------------------------------
 # File name: CodeXLRemoteAgent
-# This script sets CodeXLRemoteAgent's related environment variables and 
+# This script sets CodeXLRemoteAgent's related environment variables and
 # executed the CodeXLRemoteAgent binary executable.
 #
 # (c) 2013 Advanced Micro Devices Inc. All Rights Reserved.
@@ -41,7 +41,7 @@ fi
 # Obtain libstdc++ needed version
 LDCONFIG="ldconfig"
 command -v "$LDCONFIG" &> /dev/null || LDCONFIG="/sbin/ldconfig"
-CRUNTIMEPATH=$(${LDCONFIG} -p | grep libstdc++.so.6 | grep $ArchHint)
+CRUNTIMEPATH=$(${LDCONFIG} -p | grep libstdc++.so.6 | grep -i $ArchHint)
 CRUNTIMEFILE=${CRUNTIMEPATH##*>}
 
 # Test if current system C++ runtime is older from CodeXL version needed
@@ -50,6 +50,14 @@ NEWCRUNTIME=$(strings $CRUNTIMEFILE | grep GLIBCXX_3.4.16)
 if [ -z "$NEWCRUNTIME" ];then
     # System C++ runtime is older from CodeXL
     CXL_CLIB="${CodeXLBinariesDir}/RuntimeLibs"
+fi
+
+if ! ${LDCONFIG} -p | grep libX11.so.6 ; then
+  # In systems where X11 is not available, the remote agent will try to load
+  # libX11.so.6. This file is not strictly required for non-GUI applications
+  # but the remote agent needs this library to run. This will create a placeholder
+  # shared object for the remote agent to load in systems where it is not available.
+  cp -f libLPGPU2InputOutput.so libX11.so.6
 fi
 
 # Add CodeXLRemoteAgent's binaries directory to LD_LIBRARY_PATH:
@@ -61,4 +69,3 @@ fi
 
 # Run CodeXLRemoteAgent:
 eval "$CodeXLRemoteAgentBinaryExePath $@"
-

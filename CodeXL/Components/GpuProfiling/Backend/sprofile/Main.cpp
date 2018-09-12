@@ -156,7 +156,7 @@ static bool PrintLastError(wchar_t* szPre)
     return true;
 }
 
-static int CreateProcessWithDetour(gtString& strDirPath, gtString& strAppCommandLine, gtString& strAppWorkingDirectory, bool useDetours, bool syclTrace)
+static int CreateProcessWithDetour(gtString& strDirPath, gtString& strAppCommandLine, gtString& strAppWorkingDirectory, bool useDetours)
 {
     // set the detoured and microDLL server's path
     string dirPathAsUTF8;
@@ -197,19 +197,20 @@ static int CreateProcessWithDetour(gtString& strDirPath, gtString& strAppCommand
 
         std::string syclDll;
 
-        if (syclTrace)
-        {
-            syclDll = FileUtils::GetExePath() + "/";
-            syclDll += SYCL_DLL;
-            dllPaths[1] = syclDll.c_str();
-                }
-
-
         LPCSTR szMicroDLLPath = szMicroDllPath;
 
         dllPaths[0] = { szMicroDLLPath };
 
-        int numDlls = syclTrace ? 2 : 1;
+        int numDlls = 1;
+
+        if (config.bSYCLTrace)
+        {
+            syclDll = FileUtils::GetExePath() + "/";
+            syclDll += SYCL_DLL;
+            dllPaths[1] = syclDll.c_str();
+
+            numDlls++;
+        }        
 
         // Run the app with DCServer enabled so that app with both OpenCL and DirectCompute can run
         createProcRetVal = AMDT::CreateProcessAndInjectDllsW(config.strInjectedApp.asCharArray(),
@@ -704,13 +705,40 @@ static void GetOutputFilePath()
         {
             SetHSASoftCPEnvVar(reportPerfCounterEnablement);
         }
-    // OS_OUTPUT_DEBUG_LOG(L"....", OS_DEBUG_LOG_ERROR );
-		if (!config.strSYCLRuntimeLib.empty())
-		{
-			SetSYCLRuntimeEnvVar(config.strSYCLRuntimeLib);
-		}
 
-		// Set the value
+        if (!config.strSYCLRuntimeLib.empty())
+        {
+            SetSYCLRuntimeEnvVar(config.strSYCLRuntimeLib);
+        }
+
+        if (config.bSYCLTrace)
+        {
+            // Creates the ComputeCpp configuration file to enable the profiling API
+            // This is required by the ComputeCpp runtime in order to
+            const gtString computeCppConfigFileEnvVar = L"COMPUTECPP_CONFIGURATION_FILE";            
+            if (config.mapEnvVars.find(computeCppConfigFileEnvVar) == config.mapEnvVars.end())
+            {
+                // If the ComputeCpp configuration file is not set, it needs to be created here in order to enable SYCL tracing
+                osFilePath tmpSyclConfigFilePath{ osFilePath::OS_TEMP_DIRECTORY, L"sycl_config_file", L"" };
+                osFile tmpSyclConfigFile;
+                
+                if (!tmpSyclConfigFile.open(tmpSyclConfigFilePath, osChannel::OS_UNICODE_TEXT_CHANNEL, osFile::OS_OPEN_TO_WRITE))
+                {
+                    return -1;
+                }
+
+                if (!tmpSyclConfigFile.writeString(L"enable_profiling = true"))
+                {
+                    return -1;
+                }
+
+                tmpSyclConfigFile.close();
+
+
+                // Finally, add the ComputeCpp file to map of environment variables.
+                config.mapEnvVars[computeCppConfigFileEnvVar] = tmpSyclConfigFilePath.asString();
+            }            
+        }
 
 #ifdef _WIN32
 
@@ -724,33 +752,37 @@ static void GetOutputFilePath()
             strAppCommandLine.appendFormattedString(L" %ls", config.strInjectedAppArgs.asCharArray());
         }
 
-        // call SetDllDirectory so that the app being profiled can locate and load AMDTBaseTools/AMDTOSWrappers DLLs
-        SetDllDirectory(strDirPath.asCharArray());
+        // Call SetDllDirectoryA so the profiled application is able to load our custom OpenCL ICD loader.        
+        std::string icdDirectory = FileUtils::GetExePath();
+        icdDirectory += std::string{ "/" } + std::string{ CL_ICD_LOADER_DIR };
+        SetDllDirectoryA(icdDirectory.data());
 
-                int ret = CreateProcessWithDetour(strDirPath, strAppCommandLine, strAppWorkingDirectory, !config.bNoDetours, config.bSYCLTrace);
+        int ret = CreateProcessWithDetour(strDirPath, strAppCommandLine, strAppWorkingDirectory, !config.bNoDetours);
 
         if (ret != 0)
         {
             FileUtils::DeleteTmpFile();
             return -1;
         }
-
 #else
 
         //add SYCLTraceAgent.so to LD_PRELOAD so it loads it with the executable
-        if(config.bSYCLTrace){
+        if(config.bSYCLTrace)
+        {
             config.strPreloadLib += ":" + FileUtils::GetExePath() + "/" + SYCL_DLL;
         }
 
-        if(config.bTrace){
+        if(config.bTrace)
+        {
             config.strPreloadLib += ":" + FileUtils::GetExePath() + "/" + CL_ICD_LOADER_DLL;    //":/home/callum/OpenCL-ICD-Loader/build/lib/libOpenCL.so";
             config.strPreloadLib += ":" + FileUtils::GetExePath() + "/" + CL_TRACE_AGENT_DLL;
         }
+
         SetPreLoadLibs();
 
         // Codeplay JIRA: CST-148
         // TODO: WHY DO I NEED TO DO THIS?
-        config.mapEnvVars[L"LD_PRELOAD"].fromASCIIString(config.strPreloadLib.data());
+        // config.mapEnvVars[L"LD_PRELOAD"].fromASCIIString(config.strPreloadLib.data());
 
         std::string strAppCommandLine;
 
@@ -920,7 +952,7 @@ static void MergeTraceFile(int sig)
 
         AtpFileWriter writer(config, pid);
 
-		SYCLAtpFilePart* pSyclTrace = nullptr;
+        SYCLAtpFilePart* pSyclTrace = nullptr;
         CLAtpFilePart* pOclTrace = nullptr;
         StackTraceAtpFilePart* pClStackTrace = nullptr;
         StackTraceAtpFilePart* pHsaStackTrace = nullptr;
@@ -1353,8 +1385,8 @@ static bool UnsetPreLoadLibs()
 
 static bool SetSYCLRuntimeEnvVar(const std::string& runtimePath)
 {
-        OSUtils::Instance()->SetEnvVar("SYCL_RUNTIME_LIB", runtimePath.c_str());
-        return true;
+    OSUtils::Instance()->SetEnvVar("SYCL_RUNTIME_LIB", runtimePath.c_str());
+    return true;
 }
 
 EnvSysBlockString GetEnvironmentBlock(EnvVarMap mapUserBlock, bool bIncludeSystemEnv)

@@ -57,7 +57,6 @@ CodeXL, previously a tool developed as closed-source by Advanced Micro Devices, 
 
 To encourage 3rd party contribution and adoption, CodeXL is no longer branded as an AMD product. AMD will still continue development of this tool and upload new versions and features to GPUOpen.
 
-
 ## Installation and Build
 
 * Windows: To install CodeXL, use the [provided](https://github.com/GPUOpen-Tools/CodeXL/releases) executable file CodeXL_*.exe

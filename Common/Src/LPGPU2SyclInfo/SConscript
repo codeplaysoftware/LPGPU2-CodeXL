@@ -18,11 +18,12 @@ setup_computecpp = imp.load_source("", setup_computecpp_script)
 computecpp_folder, _ = setup_computecpp.get_computecpp_folder_and_version(full_path=True)
 
 env.Append(CPPFLAGS = '-std=c++11')
-env.Append( CPPPATH = [
+env.Append(CPPPATH = [
     env['CXL_commonproj_dir'],
     os.path.join(computecpp_folder, "include"),
     env['CXL_commonproj_dir'] + '/../../CodeXL',
 ])
+env.Append(LIBPATH = os.path.join(computecpp_folder, "lib"))
 
 UseAPPSDK(env)
 
@@ -53,8 +54,5 @@ env.Prepend(LIBS = ("libComputeCpp.so"))
 libInstall = env.Install(
         dir = env['CXL_lib_dir'],
         source = (install))
-
-computecpp_lib = os.path.join(computecpp_folder, 'lib/libComputeCpp.so')
-libInstall += env.Install(env['CXL_lib_dir'], computecpp_lib)
 
 Return('libInstall')

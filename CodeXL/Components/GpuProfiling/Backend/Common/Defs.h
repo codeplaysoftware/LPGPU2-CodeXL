@@ -77,9 +77,11 @@ using namespace GPULogger;
 #elif ARCH_AARCH64
   #define CL_ICD_LOADER_DLL "OpenCLICDLoaderDetours/aarch64/" LIB_PREFIX "OpenCL" LIB_SUFFIX
 #elif AMDT_ADDRESS_SPACE_TYPE == AMDT_64_BIT_ADDRESS_SPACE
-  #define CL_ICD_LOADER_DLL "OpenCLICDLoaderDetours/x86_64/" LIB_PREFIX "OpenCL" LIB_SUFFIX
+  #define CL_ICD_LOADER_DIR "OpenCLICDLoaderDetours/x86_64"
+  #define CL_ICD_LOADER_DLL CL_ICD_LOADER_DIR "/" LIB_PREFIX "OpenCL" LIB_SUFFIX
 #else
-  #define CL_ICD_LOADER_DLL "OpenCLICDLoaderDetours/x86/" LIB_PREFIX "OpenCL" LIB_SUFFIX
+  #define CL_ICD_LOADER_DIR "OpenCLICDLoaderDetours/x86"
+  #define CL_ICD_LOADER_DLL CL_ICD_LOADER_DIR "/" LIB_PREFIX "OpenCL" LIB_SUFFIX
 #endif
 //--CF:LPGPU2
 
