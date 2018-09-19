@@ -1,0 +1,15 @@
+package org.lpgpu.vulkanapps;
+
+import android.app.NativeActivity;
+import android.os.Bundle;
+
+public class VulkanActivity extends NativeActivity {
+    static {
+       System.loadLibrary("c++_shared");
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+}

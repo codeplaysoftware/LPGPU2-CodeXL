@@ -1,0 +1,8 @@
+build
+.gradle
+Globe/.externalNativeBuild/
+Globe/.idea/
+Globe/build/
+Globe/local.properties
+Globe/build/src/build/
+Globe/build/src/main/jniLibs/

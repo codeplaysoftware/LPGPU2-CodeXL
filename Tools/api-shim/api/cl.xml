@@ -1,0 +1,1122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ The MIT License
+
+ Copyright (c) 2018 Samsung Electronics Co., Ltd. All Rights Reserved
+ For conditions of distribution and use, see the accompanying COPYING file.
+
+-->
+<registry>
+    <comment>
+/*******************************************************************************
+ * Copyright (c) 2008-2018 The Khronos Group Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and/or associated documentation files (the
+ * "Materials"), to deal in the Materials without restriction, including
+ * without limitation the rights to use, copy, modify, merge, publish,
+ * distribute, sublicense, and/or sell copies of the Materials, and to
+ * permit persons to whom the Materials are furnished to do so, subject to
+ * the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included
+ * in all copies or substantial portions of the Materials.
+ *
+ * MODIFICATIONS TO THIS FILE MAY MEAN IT NO LONGER ACCURATELY REFLECTS
+ * KHRONOS STANDARDS. THE UNMODIFIED, NORMATIVE VERSIONS OF KHRONOS
+ * SPECIFICATIONS AND HEADER INFORMATION ARE LOCATED AT
+ *    https://www.khronos.org/registry/
+ *
+ * THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+ * EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+ * MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+ * IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+ * CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ * TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * MATERIALS OR THE USE OR OTHER DEALINGS IN THE MATERIALS.
+ ******************************************************************************/
+
+/* $Revision: 11708 $ on $Date: 2010-06-13 23:36:24 -0700 (Sun, 13 Jun 2010) $ */
+    </comment>
+    <types>
+        <type name="inttypes">
+#ifndef __OPENCL_H
+#define __OPENCL_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#ifdef __APPLE__
+
+#include &lt;OpenCL/cl.h&gt;
+#include &lt;OpenCL/cl_gl.h&gt;
+#include &lt;OpenCL/cl_gl_ext.h&gt;
+#include &lt;OpenCL/cl_ext.h&gt;
+
+#else
+
+#include &lt;CL/cl.h&gt;
+#include &lt;CL/cl_gl.h&gt;
+#include &lt;CL/cl_gl_ext.h&gt;
+#include &lt;CL/cl_ext.h&gt;
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif
+#endif
+        </type>
+        <type>typedef void (<apientry/> *<name>CREATECONTEXTCB</name>)(const char*, const void*, size_t, void*);</type>
+        <type>typedef void (<apientry/> *<name>BUILDPROGRAMCB</name>)(cl_program, void*);</type>
+        <type>typedef void (<apientry/> *<name>COMPILEPROGRAMCB</name>)(cl_program, void*);</type>
+        <type>typedef void (<apientry/> *<name>ENQUEUENATIVEKERNELCB</name>)(void*);</type>
+        <type>typedef void (<apientry/> *<name>ENQUEUESVMFREECB</name>)(cl_command_queue, cl_uint, void *[], void*);</type>
+        <type>typedef void (<apientry/> *<name>LINKPROGRAMCB</name>)(cl_program, void*);</type>
+        <type>typedef void (<apientry/> *<name>SETEVENTCB</name>)(cl_event, cl_int, void *);</type>
+        <type>typedef void (<apientry/> *<name>SETMEMOBJDESTCB</name>)(cl_mem, void *);</type>
+
+
+
+    </types>
+
+    <feature api="cl" name="CL_VERSION_1_0" number="1.0">
+        <require>
+            <command name="clGetPlatformIDs"/>
+            <command name="clGetPlatformInfo"/>
+            <command name="clGetDeviceIDs"/>
+            <command name="clGetDeviceInfo"/>
+            <command name="clCreateContext"/>
+            <command name="clCreateContextFromType"/>
+            <command name="clRetainContext"/>
+            <command name="clReleaseContext"/>
+            <command name="clGetContextInfo"/>
+            <command name="clRetainCommandQueue"/>
+            <command name="clReleaseCommandQueue"/>
+            <command name="clGetCommandQueueInfo"/>
+            <command name="clCreateBuffer"/>
+            <command name="clRetainMemObject"/>
+            <command name="clReleaseMemObject"/>
+            <command name="clGetSupportedImageFormats"/>
+            <command name="clGetMemObjectInfo"/>
+            <command name="clGetImageInfo"/>
+            <command name="clRetainSampler"/>
+            <command name="clReleaseSampler"/>
+            <command name="clGetSamplerInfo"/>
+            <command name="clCreateProgramWithSource"/>
+            <command name="clCreateProgramWithBinary"/>
+            <command name="clRetainProgram"/>
+            <command name="clReleaseProgram"/>
+            <command name="clBuildProgram"/>
+            <command name="clGetProgramInfo"/>
+            <command name="clGetProgramBuildInfo"/>
+            <command name="clCreateKernel"/>
+            <command name="clCreateKernelsInProgram"/>
+            <command name="clRetainKernel"/>
+            <command name="clReleaseKernel"/>
+            <command name="clSetKernelArg"/>
+            <command name="clGetKernelInfo"/>
+            <command name="clGetKernelWorkGroupInfo"/>
+            <command name="clWaitForEvents"/>
+            <command name="clGetEventInfo"/>
+            <command name="clRetainEvent"/>
+            <command name="clReleaseEvent"/>
+            <command name="clGetEventProfilingInfo"/>
+            <command name="clFlush"/>
+            <command name="clFinish"/>
+            <command name="clEnqueueReadBuffer"/>
+            <command name="clEnqueueWriteBuffer"/>
+            <command name="clEnqueueCopyBuffer"/>
+            <command name="clEnqueueReadImage"/>
+            <command name="clEnqueueWriteImage"/>
+            <command name="clEnqueueCopyImage"/>
+            <command name="clEnqueueCopyImageToBuffer"/>
+            <command name="clEnqueueCopyBufferToImage"/>
+            <command name="clEnqueueMapBuffer"/>
+            <command name="clEnqueueMapImage"/>
+            <command name="clEnqueueUnmapMemObject"/>
+            <command name="clEnqueueNDRangeKernel"/>
+            <command name="clEnqueueNativeKernel"/>
+            <command name="clCreateImage2D"/>
+            <command name="clCreateImage3D"/>
+            <command name="clEnqueueMarker"/>
+            <command name="clEnqueueWaitForEvents"/>
+            <command name="clEnqueueBarrier"/>
+            <command name="clUnloadCompiler"/>
+            <command name="clGetExtensionFunctionAddress"/>
+            <command name="clCreateCommandQueue"/>
+            <command name="clCreateSampler"/>
+            <command name="clEnqueueTask"/>
+        </require>
+    </feature>
+
+    <feature api="cl" name="CL_VERSION_1_1" number="1.1">
+        <require>
+            <command name="clCreateSubBuffer"/>
+            <command name="clSetMemObjectDestructorCallback"/>
+            <command name="clCreateUserEvent"/>
+            <command name="clSetUserEventStatus"/>
+            <command name="clSetEventCallback"/>
+            <command name="clEnqueueReadBufferRect"/>
+            <command name="clEnqueueWriteBufferRect"/>
+            <command name="clEnqueueCopyBufferRect"/>
+        </require>
+        <deprecate>
+            <command name="clCreateImage2D"/>
+            <command name="clCreateImage3D"/>
+            <command name="clEnqueueMarker"/>
+            <command name="clEnqueueWaitForEvents"/>
+            <command name="clEnqueueBarrier"/>
+            <command name="clUnloadCompiler"/>
+            <command name="clGetExtensionFunctionAddress"/>
+        </deprecate>
+    </feature>
+
+
+
+    <feature api="cl" name="CL_VERSION_1_2" number="1.2">
+        <require>
+            <command name="clCreateSubDevices"/>
+            <command name="clRetainDevice"/>
+            <command name="clReleaseDevice"/>
+            <command name="clCreateImage"/>
+            <command name="clCreateProgramWithBuiltInKernels"/>
+            <command name="clCompileProgram"/>
+            <command name="clLinkProgram"/>
+            <command name="clUnloadPlatformCompiler"/>
+            <command name="clGetKernelArgInfo"/>
+            <command name="clEnqueueFillBuffer"/>
+            <command name="clEnqueueFillImage"/>
+            <command name="clEnqueueMigrateMemObjects"/>
+            <command name="clEnqueueMarkerWithWaitList"/>
+            <command name="clEnqueueBarrierWithWaitList"/>
+            <command name="clGetExtensionFunctionAddressForPlatform"/>
+        </require>
+        <deprecate>
+            <command name="clCreateCommandQueue"/>
+            <command name="clCreateSampler"/>
+            <command name="clEnqueueTask"/>
+        </deprecate>
+    </feature>
+
+    <feature api="cl" name="CL_VERSION_2_0" number="2.0">
+        <require>
+            <command name="clCreateCommandQueueWithProperties"/>
+            <command name="clCreatePipe"/>
+            <command name="clGetPipeInfo"/>
+            <command name="clSVMAlloc"/>
+            <command name="clSVMFree"/>
+            <command name="clCreateSamplerWithProperties"/>
+            <command name="clSetKernelArgSVMPointer"/>
+            <command name="clSetKernelExecInfo"/>
+            <command name="clEnqueueSVMFree"/>
+            <command name="clEnqueueSVMMemcpy"/>
+            <command name="clEnqueueSVMMemFill"/>
+            <command name="clEnqueueSVMMap"/>
+            <command name="clEnqueueSVMUnmap"/>
+        </require>
+    </feature>
+
+
+    <feature api="cl" name="CL_VERSION_2_1" number="2.1">
+        <require>
+            <command name="clSetDefaultDeviceCommandQueue"/>
+            <command name="clGetDeviceAndHostTimer"/>
+            <command name="clGetHostTimer"/>
+            <command name="clCreateProgramWithIL"/>
+            <command name="clCloneKernel"/>
+            <command name="clGetKernelSubGroupInfo"/>
+            <command name="clEnqueueSVMMigrateMem"/>
+        </require>
+    </feature>
+
+    <feature api="cl" name="CL_VERSION_2_2" number="2.2">
+        <require>
+            <command name="clSetProgramReleaseCallback"/>
+            <command name="clSetProgramSpecializationConstant"/>
+        </require>
+    </feature>
+
+    <commands namespace="cl">
+       <command>
+            <proto><ptype>cl_int</ptype> <name>clGetPlatformIDs</name></proto>
+            <param><ptype>cl_uint</ptype> <name>num_entries</name></param>
+            <param><ptype>cl_platform_id</ptype>*<name>platforms</name></param>
+            <param><ptype>cl_uint</ptype>*<name>num_platforms</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetPlatformInfo</name></proto>
+            <param><ptype>cl_platform_id</ptype> <name>platform</name></param>
+            <param><ptype>cl_platform_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetDeviceIDs</name></proto>
+            <param><ptype>cl_platform_id</ptype> <name>platform</name></param>
+            <param><ptype>cl_device_type</ptype> <name>device_type</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_entries</name></param>
+            <param><ptype>cl_device_id</ptype>*<name>devices</name></param>
+            <param><ptype>cl_uint</ptype>*<name>num_devices</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetDeviceInfo</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>devices</name></param>
+            <param><ptype>cl_device_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_context <name>clCreateContext</name></proto>
+            <param><ptype>const cl_context_properties</ptype>*<name>properties</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>*<name>devices</name></param>
+            <param><ptype>CREATECONTEXTCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_context <name>clCreateContextFromType</name></proto>
+            <param><ptype>const cl_context_properties</ptype>*<name>properties</name></param>
+            <param><ptype>cl_device_type</ptype> <name>device_type</name></param>
+            <param><ptype>CREATECONTEXTCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainContext</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseContext</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetContextInfo</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_context_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainCommandQueue</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseCommandQueue</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetCommandQueueInfo</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_command_queue_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreateBuffer</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>void</ptype>*<name>host_ptr</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainMemObject</name></proto>
+            <param><ptype>cl_mem</ptype> <name>mem_object</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseMemObject</name></proto>
+            <param><ptype>cl_mem</ptype> <name>mem_object</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetSupportedImageFormats</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>cl_mem_object_type</ptype> <name>image_type</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_entries</name></param>
+            <param><ptype>cl_image_format</ptype>*<name>image_formats</name></param>
+            <param><ptype>cl_uint</ptype>*<name>num_image_formats</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetMemObjectInfo</name></proto>
+            <param><ptype>cl_mem</ptype> <name>memobj</name></param>
+            <param><ptype>cl_mem_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetImageInfo</name></proto>
+            <param><ptype>cl_mem</ptype> <name>image</name></param>
+            <param><ptype>cl_image_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainSampler</name></proto>
+            <param><ptype>cl_sampler</ptype> <name>sampler</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseSampler</name></proto>
+            <param><ptype>cl_sampler</ptype> <name>sampler</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetSamplerInfo</name></proto>
+            <param><ptype>cl_sampler</ptype> <name>sampler</name></param>
+            <param><ptype>cl_sampler_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_program <name>clCreateProgramWithSource</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_uint</ptype> <name>count</name></param>
+            <param><ptype>const char</ptype>**<name>strings</name></param>
+            <param><ptype>const size_t</ptype>*<name>lengths</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_program <name>clCreateProgramWithBinary</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>*<name>device_list</name></param>
+            <param><ptype>const size_t</ptype>*<name>lengths</name></param>
+            <param><ptype>const unsigned char</ptype>**<name>binaries</name></param>
+            <param><ptype>cl_int</ptype>*<name>binary_Status</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainProgram</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseProgram</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clBuildProgram</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>*<name>device_list</name></param>
+            <param><ptype>const char</ptype>*<name>options</name></param>
+            <param><ptype>BUILDPROGRAMCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetProgramInfo</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_program_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetProgramBuildInfo</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+            <param><ptype>cl_program_build_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_kernel <name>clCreateKernel</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>const char</ptype>*<name>kernel_name</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clCreateKernelsInProgram</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_kernels</name></param>
+            <param><ptype>cl_kernel</ptype>*<name>kernels</name></param>
+            <param><ptype>cl_uint</ptype>*<name>num_kernels_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainKernel</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseKernel</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetKernelArg</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_uint</ptype> <name>arg_index</name></param>
+            <param><ptype>size_t</ptype> <name>arg__size</name></param>
+            <param><ptype>const void</ptype>*<name>arg_value</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetKernelInfo</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_kernel_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetKernelWorkGroupInfo</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+            <param><ptype>cl_kernel_work_group_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clWaitForEvents</name></proto>
+            <param><ptype>cl_uint</ptype> <name>num_events</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_list</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetEventInfo</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+            <param><ptype>cl_event_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainEvent</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseEvent</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetEventProfilingInfo</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+            <param><ptype>cl_profiling_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clFlush</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clFinish</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueReadBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_read</name></param>
+            <param><ptype>size_t</ptype> <name>offset</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueWriteBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_write</name></param>
+            <param><ptype>size_t</ptype> <name>offset</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>const void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueCopyBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>src_buffer</name></param>
+            <param><ptype>cl_mem</ptype> <name>dst_buffer</name></param>
+            <param><ptype>size_t</ptype> <name>src_offset</name></param>
+            <param><ptype>size_t</ptype> <name>dst_offset</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueReadImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>image</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_read</name></param>
+            <param><ptype>const size_t</ptype>*<name>origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype> <name>row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>slice_pitch</name></param>
+            <param><ptype>void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueWriteImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>image</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_write</name></param>
+            <param><ptype>const size_t</ptype>*<name>origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype> <name>row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>slice_pitch</name></param>
+            <param><ptype>const void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueCopyImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>src_image</name></param>
+            <param><ptype>cl_mem</ptype> <name>dst_image</name></param>
+            <param><ptype>const size_t</ptype>*<name>src_origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>dst_origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueCopyImageToBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>src_image</name></param>
+            <param><ptype>cl_mem</ptype> <name>dst_buffer</name></param>
+            <param><ptype>const size_t</ptype>*<name>src_origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>dst_origin</name></param>
+            <param><ptype>size_t</ptype> <name>dst_offset</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueCopyBufferToImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>src_buffer</name></param>
+            <param><ptype>cl_mem</ptype> <name>dst_image</name></param>
+            <param><ptype>size_t</ptype> <name>src_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>dst_origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>void* <name>clEnqueueMapBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_map</name></param>
+            <param><ptype>cl_map_flags</ptype> <name>map_flags</name></param>
+            <param><ptype>size_t</ptype> <name>offset</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>void* <name>clEnqueueMapImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>image</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_map</name></param>
+            <param><ptype>cl_map_flags</ptype> <name>map_flags</name></param>
+            <param><ptype>const size_t</ptype>*<name>origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype>*<name>image_row_pitch</name></param>
+            <param><ptype>size_t</ptype>*<name>image_slice_pitch</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueUnmapMemObject</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>memobj</name></param>
+            <param><ptype>void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueNDRangeKernel</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_uint</ptype> <name>work_dim</name></param>
+            <param><ptype>const size_t</ptype>*<name>global_work_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>global_work_size</name></param>
+            <param><ptype>const size_t</ptype>*<name>local_work_size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueNativeKernel</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>ENQUEUENATIVEKERNELCB</ptype> <name>user_func</name></param>
+            <param><ptype>void</ptype>*<name>args</name></param>
+            <param><ptype>size_t</ptype> <name>cb_args</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_mem_objects</name></param>
+            <param><ptype>const cl_mem</ptype>*<name>mem_list</name></param>
+            <param><ptype>const void</ptype>**<name>args_mem_loc</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreateImage2D</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>const cl_image_format</ptype>*<name>image_format</name></param>
+            <param><ptype>size_t</ptype> <name>image_width</name></param>
+            <param><ptype>size_t</ptype> <name>image_height</name></param>
+            <param><ptype>size_t</ptype> <name>image_row_pitch</name></param>
+            <param><ptype>void</ptype>*<name>host_ptr</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreateImage3D</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>const cl_image_format</ptype>*<name>image_format</name></param>
+            <param><ptype>size_t</ptype> <name>image_width</name></param>
+            <param><ptype>size_t</ptype> <name>image_height</name></param>
+            <param><ptype>size_t</ptype> <name>image_depth</name></param>
+            <param><ptype>size_t</ptype> <name>image_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>image_slice_pitch</name></param>
+            <param><ptype>void</ptype>*<name>host_ptr</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueMarker</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueWaitForEvents</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_list</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueBarrier</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clUnloadCompiler</name></proto>
+        </command>
+        <command>
+            <proto>void *<name>clGetExtensionFunctionAddress</name></proto>
+            <param><ptype>const char</ptype>*<name>func_name</name></param>
+        </command>
+        <command>
+            <proto>cl_command_queue <name>clCreateCommandQueue</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+            <param><ptype>cl_command_queue_properties</ptype> <name>properties</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_sampler <name>clCreateSampler</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_bool</ptype> <name>normalized_coords</name></param>
+            <param><ptype>cl_addressing_mode</ptype> <name>addressing_mode</name></param>
+            <param><ptype>cl_filter_mode</ptype> <name>filter_mode</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueTask</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreateSubBuffer</name></proto>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>cl_buffer_create_type</ptype> <name>buffer_create_type</name></param>
+            <param><ptype>const void</ptype>*<name>buffer_create_info</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetMemObjectDestructorCallback</name></proto>
+            <param><ptype>cl_mem</ptype> <name>memobj</name></param>
+            <param><ptype>SETMEMOBJDESTCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+        </command>
+        <command>
+            <proto>cl_event <name>clCreateUserEvent</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetUserEventStatus</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+            <param><ptype>cl_int</ptype> <name>execution_status</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetEventCallback</name></proto>
+            <param><ptype>cl_event</ptype> <name>event</name></param>
+            <param><ptype>cl_int</ptype> <name>command_exec_callback_type</name></param>
+            <param><ptype>SETEVENTCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+        </command>
+
+        <command>
+            <proto>cl_int <name>clEnqueueReadBufferRect</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_read</name></param>
+            <param><ptype>const size_t</ptype>*<name>buffer_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>host_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_slice_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_slice_pitch</name></param>
+            <param><ptype>void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueWriteBufferRect</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_write</name></param>
+            <param><ptype>const size_t</ptype>*<name>buffer_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>host_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_slice_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_slice_pitch</name></param>
+            <param><ptype>const void</ptype>*<name>ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueCopyBufferRect</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>src_buffer</name></param>
+            <param><ptype>cl_mem</ptype> <name>dst_buffer</name></param>
+            <param><ptype>const size_t</ptype>*<name>buffer_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>host_offset</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>buffer_slice_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_row_pitch</name></param>
+            <param><ptype>size_t</ptype> <name>host_slice_pitch</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clCreateSubDevices</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+            <param><ptype>const cl_device_partition_property</ptype>*<name>properties</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>cl_device_id</ptype>*<name>out_devices</name></param>
+            <param><ptype>cl_uint</ptype>*<name>num_devices_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clRetainDevice</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clReleaseDevice</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreateImage</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>const cl_image_format</ptype>*<name>image_format</name></param>
+            <param><ptype>const cl_image_desc</ptype>*<name>image_desc</name></param>
+            <param><ptype>void</ptype>*<name>host_ptr</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_program <name>clCreateProgramWithBuiltInKernels</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>*<name>device_list</name></param>
+            <param><ptype>const char</ptype>*<name>kernel_names</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clCompileProgram</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>* <name>device_list</name></param>
+            <param><ptype>const char</ptype>*<name>options</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_input_headers</name></param>
+            <param><ptype>const cl_program</ptype>*<name>input_headers</name></param>
+            <param><ptype>const char</ptype>**<name>header_include_names</name></param>
+            <param><ptype>COMPILEPROGRAMCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+        </command>
+        <command>
+            <proto>cl_program <name>clLinkProgram</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_devices</name></param>
+            <param><ptype>const cl_device_id</ptype>* <name>device_list</name></param>
+            <param><ptype>const char</ptype>*<name>options</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_input_programs</name></param>
+            <param><ptype>const cl_program</ptype>*<name>input_programs</name></param>
+            <param><ptype>LINKPROGRAMCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetProgramReleaseCallback</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>LINKPROGRAMCB</ptype> <name>pfn_notify</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetProgramSpecializationConstant</name></proto>
+            <param><ptype>cl_program</ptype> <name>program</name></param>
+            <param><ptype>cl_uint</ptype> <name>spec_id</name></param>
+            <param><ptype>size_t</ptype> <name>spec_size</name></param>
+            <param><ptype>const void</ptype>*<name>spec_value</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clUnloadPlatformCompiler</name></proto>
+            <param><ptype>cl_platform_id</ptype> <name>platform</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetKernelArgInfo</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_uint</ptype> <name>arg_index</name></param>
+            <param><ptype>cl_kernel_arg_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueFillBuffer</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>const void</ptype>*<name>pattern</name></param>
+            <param><ptype>size_t</ptype> <name>pattern_size</name></param>
+            <param><ptype>size_t</ptype> <name>offset</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueFillImage</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_mem</ptype> <name>buffer</name></param>
+            <param><ptype>const void</ptype>*<name>fill_color</name></param>
+            <param><ptype>const size_t</ptype>*<name>origin</name></param>
+            <param><ptype>const size_t</ptype>*<name>region</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueMigrateMemObjects</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_mem_objects</name></param>
+            <param><ptype>const cl_mem</ptype>*<name>memobjs</name></param>
+            <param><ptype>cl_mem_migration_flags</ptype> <name>flags</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueMarkerWithWaitList</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueBarrierWithWaitList</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>void *<name>clGetExtensionFunctionAddressForPlatform</name></proto>
+            <param><ptype>cl_platform_id</ptype> <name>platform</name></param>
+            <param><ptype>const char</ptype>*<name>func_name</name></param>
+        </command>
+        <command>
+            <proto>cl_command_queue <name>clCreateCommandQueueWithProperties</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device</name></param>
+            <param><ptype>const cl_queue_properties</ptype>*<name>properties</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_mem <name>clCreatePipe</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>cl_uint</ptype> <name>pipe_packet_size</name></param>
+            <param><ptype>cl_uint</ptype> <name>pipe_max_packets</name></param>
+            <param><ptype>const cl_pipe_properties</ptype>*<name>properties</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetPipeInfo</name></proto>
+            <param><ptype>cl_mem</ptype> <name>image</name></param>
+            <param><ptype>cl_pipe_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>void* <name>clSVMAlloc</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_svm_mem_flags</ptype> <name>flags</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>alignment</name></param>
+        </command>
+        <command>
+            <proto>void<name>clSVMFree</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>void</ptype>*<name>ptr</name></param>
+        </command>
+        <command>
+            <proto>cl_sampler <name>clCreateSamplerWithProperties</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>const cl_sampler_properties</ptype>*<name>sampler_properties</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetKernelArgSVMPointer</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_uint</ptype> <name>arg_index</name></param>
+            <param><ptype>const void</ptype>*<name>arg_value</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetKernelExecInfo</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_kernel_exec_info</ptype> <name>param_name</name></param>
+            <param><ptype>size_t</ptype> <name>param_size</name></param>
+            <param><ptype>const void</ptype>*<name>param_value</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMFree</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_svm_pointers</name></param>
+            <param><ptype>void</ptype>**<name>svm_pointers</name></param>
+            <param><ptype>ENQUEUESVMFREECB</ptype> <name>pfn_free_func</name></param>
+            <param><ptype>void</ptype>*<name>user_data</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMMemcpy</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_copy</name></param>
+            <param><ptype>void</ptype>*<name>dest_ptr</name></param>
+            <param><ptype>const void</ptype>*<name>src_ptr</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMMemFill</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>void</ptype>*<name>svm_ptr</name></param>
+            <param><ptype>const void</ptype>*<name>pattern</name></param>
+            <param><ptype>size_t</ptype> <name>pattern_size</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMMap</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_bool</ptype> <name>blocking_map</name></param>
+            <param><ptype>cl_map_flags</ptype> <name>flags</name></param>
+            <param><ptype>void</ptype>*<name>svm_ptr</name></param>
+            <param><ptype>size_t</ptype> <name>size</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMUnmap</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>void</ptype>*<name>svm_ptr</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clSetDefaultDeviceCommandQueue</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device_id</name></param>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetDeviceAndHostTimer</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>device_id</name></param>
+            <param><ptype>cl_ulong</ptype>*<name>device_timestamp</name></param>
+            <param><ptype>cl_ulong</ptype>*<name>host_timestamp</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetHostTimer</name></proto>
+            <param><ptype>cl_device_id</ptype> <name>device_id</name></param>
+            <param><ptype>cl_ulong</ptype>*<name>host_timestamp</name></param>
+        </command>
+        <command>
+            <proto>cl_program <name>clCreateProgramWithIL</name></proto>
+            <param><ptype>cl_context</ptype> <name>context</name></param>
+            <param><ptype>const void</ptype>*<name>il</name></param>
+            <param><ptype>size_t</ptype> <name>length</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_kernel <name>clCloneKernel</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_int</ptype>*<name>errcode_ret</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clGetKernelSubGroupInfo</name></proto>
+            <param><ptype>cl_kernel</ptype> <name>kernel</name></param>
+            <param><ptype>cl_device_id</ptype> <name>device_id</name></param>
+            <param><ptype>cl_kernel_sub_group_info</ptype> <name>sub_group_info</name></param>
+            <param><ptype>size_t</ptype> <name>input_value_size</name></param>
+            <param><ptype>const void</ptype>*<name>input_value</name></param>
+            <param><ptype>size_t</ptype> <name>param_value_size</name></param>
+            <param><ptype>void</ptype>*<name>param_value</name></param>
+            <param><ptype>size_t</ptype>*<name>param_value_ret_size</name></param>
+        </command>
+        <command>
+            <proto>cl_int <name>clEnqueueSVMMigrateMem</name></proto>
+            <param><ptype>cl_command_queue</ptype> <name>command_queue</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_svm_pointers</name></param>
+            <param><ptype>const void</ptype>**<name>svm_pointers</name></param>
+            <param><ptype>const size_t</ptype>*<name>sizes</name></param>
+            <param><ptype>cl_mem_migration_flags</ptype> <name>flags</name></param>
+            <param><ptype>cl_uint</ptype> <name>num_events_in_wait_list</name></param>
+            <param><ptype>const cl_event</ptype>*<name>event_wait_list</name></param>
+            <param><ptype>cl_event</ptype>*<name>event</name></param>
+        </command>
+    </commands>
+</registry>
+
+

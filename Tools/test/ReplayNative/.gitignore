@@ -1,0 +1,8 @@
+build
+.gradle
+Replay/.externalNativeBuild/
+Replay/.idea/
+Replay/build/
+Replay/local.properties
+Replay/build/src/build/
+Replay/build/src/main/jniLibs/
