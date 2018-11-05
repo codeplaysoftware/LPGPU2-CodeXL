@@ -1079,8 +1079,10 @@ bool FileUtils::MergeTmpTraceFiles(SP_outStream& sout,
     gtList<osFilePath> files;
     osDirectory tempFileDirectory(strTmpFilesDirPath);
 
-    gtString finalPrefix = strFilePrefix;
-    finalPrefix.append(L"*");
+	// ++LPGPU2: Thales: This fixes the parsing of the trace files when merging them.
+	gtString finalPrefix = strFilePrefix;
+	finalPrefix.append(L"*");
+	// --LPGPU2: Thales: This fixes the parsing of the trace files when merging them.
 
     bool ret = tempFileDirectory.getContainedFilePaths(finalPrefix, osDirectory::SORT_BY_NAME_ASCENDING, files);
 
