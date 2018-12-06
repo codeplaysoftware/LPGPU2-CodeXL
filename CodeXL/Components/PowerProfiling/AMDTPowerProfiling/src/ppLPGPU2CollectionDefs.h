@@ -125,7 +125,8 @@ private:
     bool m_explicitControlEnable = false;
     GpuTimingMode m_gpuTimingMode = DisjointFrame;
     CommandNamesOverride m_commandsDefaultOverride = recordParameters;
-    gtUInt32 m_numberedBufferSize = 10000;
+    // TIZEN - allow a smaller buffer for tuning the packet size shim uses MIN_MEGACHUNK_SIZE
+    gtUInt32 m_numberedBufferSize = 0;
     gtInt32 m_statsWriteThreshold = -1;
     gtInt32 m_startDraw = -1, m_startFrame = -1, m_stopDraw = -1,
             m_stopFrame = -1;
@@ -187,7 +188,8 @@ private:
     bool m_explicitControlEnable = false;
     GpuTimingMode m_gpuTimingMode = DisjointFrame;
     CommandNamesOverride m_commandsDefaultOverride = recordParameters;
-    gtUInt32 m_numberedBufferSize = 10000;
+    // TIZEN - allow a smaller buffer for tuning the packet size shim uses MIN_MEGACHUNK_SIZE
+    gtUInt32 m_numberedBufferSize = 0;
     gtUInt32 m_dcApiIntervalHz = 1000;
     gtUInt32 m_frameTerminatorsBitfield =
       FrameTerminatorApiCalls::FT_CL_FINISH |

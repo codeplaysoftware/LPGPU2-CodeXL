@@ -501,6 +501,7 @@ void ppAppController::onProfileStarted(const gtString& profileTypeStr, const spI
                     if (now - startLoopTime > LPGPU2ppADBCommands::MaxStartAdbWaitTime)
                     {
                         bIsAndroidOk = false;
+                        OS_OUTPUT_DEBUG_LOG(PP_STR_ADBStartErrorMessage, OS_DEBUG_LOG_ERROR);
                         break;
                     }
                 }
@@ -523,6 +524,7 @@ void ppAppController::onProfileStarted(const gtString& profileTypeStr, const spI
                         if (now - startLoopTime > LPGPU2ppADBCommands::MaxStopRAgentWaitTime)
                         {
                             bIsAndroidOk = false;
+                            OS_OUTPUT_DEBUG_LOG(PP_STR_RAgentStopErrorMessage, OS_DEBUG_LOG_ERROR);
                             break;
                         }
                     }
@@ -542,6 +544,7 @@ void ppAppController::onProfileStarted(const gtString& profileTypeStr, const spI
                     if (now - startLoopTime > LPGPU2ppADBCommands::MaxStartRAgentWaitTime)
                     {
                         bIsAndroidOk = false;
+                        OS_OUTPUT_DEBUG_LOG(PP_STR_RAgentStartErrorMessage, OS_DEBUG_LOG_ERROR);
                         break;
                     }
                 }

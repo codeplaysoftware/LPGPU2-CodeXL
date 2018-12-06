@@ -98,6 +98,8 @@ private:
     void SetRAgentInstalledStatus(bool vbIsInstalled);
     void SetRAgentRunning(bool vbIsRunning);
     void SetADBDevices(gtVector<gtString> &&vNewDevices);
+    void PauseMonitoring();
+    void ResumeMonitoring();
 
 // Attributes:
 private:
@@ -108,6 +110,7 @@ private:
     int m_adbObserverTimerId = -1;  //!< The timer id used by this object to monitor the ADB status.
 
     bool m_bIsADBPathValid = false;
+    bool m_bIsTizenTarget = false;
     osFilePath m_ADBPath;
     gtString m_ADBVersion;
     gtString m_ADBRevision;

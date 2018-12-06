@@ -21,6 +21,10 @@
 // STL:
 #include <chrono>
 
+#if AMDT_BUILD_TARGET == AMDT_LINUX_OS
+    #include <unistd.h>
+#endif
+
 /// @brief  Interval between ADB system queries.
 static constexpr auto gs_ADBMonitorTimerInterval = std::chrono::milliseconds{ 2000 };
 
@@ -113,6 +117,21 @@ void LPGPU2ppADBCommandExecutor::OnStartMonitoring()
     m_adbObserverTimerId = startTimer(gs_ADBMonitorTimerInterval.count());
 }
 
+///@brief TIZEN FIX do not monitor during capture as this leads to high CPU utilization
+void LPGPU2ppADBCommandExecutor::PauseMonitoring()
+{
+    if (m_adbObserverTimerId != -1)
+    {
+        killTimer(m_adbObserverTimerId);
+    }
+}
+
+///@brief TIZEN FIX resume device status monitoring after capture has finished
+void LPGPU2ppADBCommandExecutor::ResumeMonitoring()
+{
+    m_adbObserverTimerId = startTimer(gs_ADBMonitorTimerInterval.count());
+}
+
 /// @brief  Handles request to start ADB as a server.
 /// @warning    If ADB is already running this method does nothing.
 void LPGPU2ppADBCommandExecutor::OnStartADB()
@@ -150,7 +169,19 @@ void LPGPU2ppADBCommandExecutor::OnStartRAgent()
     if (m_bIsADBRunning && m_bIsRAgentInstalled && !m_bIsRAgentRunning)
     {
         gtString output;
-        if (ExecADBCommand(L"shell am start -W -n agent.remote.lpgpu2.lpgpu2ragent/agent.remote.lpgpu2.lpgpu2ragent.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER", output) == lpgpu2::PPFnStatus::success)
+        gtString command;
+
+        if (!m_bIsTizenTarget)
+        {
+            command = L"shell am start -W -n agent.remote.lpgpu2.lpgpu2ragent/agent.remote.lpgpu2.lpgpu2ragent.MainActivity"
+                       " -a android.intent.action.MAIN -c android.intent.category.LAUNCHER";
+        }
+        else
+        {
+            command = L"shell \"nohup /opt/usr/lpgpu2-remote-agent/start_ragent.sh > /tmp/lpgpu2-remote-agent.log\"";
+        }
+
+        if (ExecADBCommand(command, output) == lpgpu2::PPFnStatus::success)
         {
             const auto bIsRAgentRunning = GetRAgentRunningStatus();
             SetRAgentRunning(bIsRAgentRunning);
@@ -165,7 +196,15 @@ void LPGPU2ppADBCommandExecutor::OnStopRAgent()
     if (m_bIsADBRunning && m_bIsRAgentInstalled && m_bIsRAgentRunning)
     {
         gtString output;
-        ExecADBCommand(L"shell am force-stop agent.remote.lpgpu2.lpgpu2ragent", output);
+        if (!m_bIsTizenTarget)
+        {
+            ExecADBCommand(L"shell am force-stop agent.remote.lpgpu2.lpgpu2ragent", output);
+        }
+        else
+        {
+            ExecADBCommand(L"shell /opt/usr/lpgpu2-remote-agent/stop_ragent.sh", output);
+        }
+
         const auto bIsRAgentRunning = GetRAgentRunningStatus();
         SetRAgentRunning(bIsRAgentRunning);
     }
@@ -278,6 +317,26 @@ bool LPGPU2ppADBCommandExecutor::GetADBRunningStatus() const
 #if AMDT_BUILD_TARGET == AMDT_WINDOWS_OS    
     return osIsProcessAlive(L"adb.exe");
 #elif AMDT_BUILD_TARGET == AMDT_LINUX_OS
+    // Tizen - use the specified debug bridge if set
+    if (!m_ADBPath.isEmpty())
+    {
+        gtString adbFilename;
+        m_ADBPath.getFileNameAndExtension(adbFilename);
+
+        // Resolve a symbolic link if necessary
+        const char* pPathAsChars = m_ADBPath.asString().asASCIICharArray();
+        gtString adbFilepath = m_ADBPath.asString();
+        char buf[512] = {};
+        int count = readlink(pPathAsChars, buf, sizeof(buf));
+        if (count > 0)
+        {
+            gtString name;
+            adbFilename.fromASCIIString(buf);
+        }
+
+        return osIsProcessAlive(adbFilename);
+    }
+
     return osIsProcessAlive(L"adb");
 #else
 #error Unsupported OS
@@ -292,9 +351,19 @@ bool LPGPU2ppADBCommandExecutor::GetRAgentInstallationStatus() const
     auto bReturn = false;
 
     gtString output;
-    if (ExecADBCommand(L"shell pm list packages | grep package:agent.remote.lpgpu2.lpgpu2ragent", output) == lpgpu2::PPFnStatus::success)
+    if (!m_bIsTizenTarget)
     {
-        bReturn = output.trim().compareNoCase(L"package:agent.remote.lpgpu2.lpgpu2ragent") == 0;
+        if (ExecADBCommand(L"shell pm list packages | grep package:agent.remote.lpgpu2.lpgpu2ragent", output) == lpgpu2::PPFnStatus::success)
+        {
+            bReturn = output.trim().compareNoCase(L"package:agent.remote.lpgpu2.lpgpu2ragent") == 0;
+        }
+    }
+    else
+    {
+        if (ExecADBCommand(L"shell rpm -qa | grep lpgpu2-remote-agent-0.0.1-01.armv7l", output) == lpgpu2::PPFnStatus::success)
+        {
+           bReturn = output.trim().compareNoCase(L"lpgpu2-remote-agent-0.0.1-01.armv7l") == 0;
+        }
     }
 
     return bReturn;
@@ -308,9 +377,19 @@ bool LPGPU2ppADBCommandExecutor::GetRAgentRunningStatus() const
     auto bReturn = false;
 
     gtString output;
-    if (ExecADBCommand(L"shell ps | grep agent.remote.lpgpu2.lpgpu2ragent", output) == lpgpu2::PPFnStatus::success)
+    if (!m_bIsTizenTarget)
     {
-        bReturn = !output.isEmpty();
+        if (ExecADBCommand(L"shell ps | grep agent.remote.lpgpu2.lpgpu2ragent", output) == lpgpu2::PPFnStatus::success)
+        {
+            bReturn = !output.isEmpty();
+        }
+    }
+    else
+    {
+        if (ExecADBCommand(L"shell ps -ef | grep lpgpu2-remote-agent", output) == lpgpu2::PPFnStatus::success)
+        {
+            bReturn = !output.isEmpty();
+        }
     }
 
     return bReturn;
@@ -361,6 +440,15 @@ gtVector<gtString> LPGPU2ppADBCommandExecutor::GetAttachedDevices() const
             deviceModelCmd += L" shell getprop ro.product.model";
             if (ExecADBCommand(deviceModelCmd, output, bNoDevice) == lpgpu2::PPFnStatus::success)
             {
+                // Fallback to Tizen
+                if (output.find(L"command not found"))
+                {
+                    deviceModelCmd = L"-s ";
+                    deviceModelCmd += deviceName;
+                    deviceModelCmd += L" shell cat /etc/info.ini | grep Model";
+                    ExecADBCommand(deviceModelCmd, output, bNoDevice);
+                }
+
                 deviceName += L" (";
                 deviceName += output.trim();
                 deviceName += L")";
@@ -404,6 +492,15 @@ void LPGPU2ppADBCommandExecutor::ValidateADBPath()
             if (line.find(searchText) != -1)
             {
                 line.getSubString(searchText.length() + 1, line.length(), m_ADBVersion);
+                m_bIsTizenTarget = false;
+            }
+
+            // Tizen support
+            searchText = L"Smart Development Bridge version";
+            if (line.find(searchText) != -1)
+            {
+                line.getSubString(searchText.length() + 1, line.length(), m_ADBVersion);
+                m_bIsTizenTarget = true;
             }
 
             searchText = L"Revision";

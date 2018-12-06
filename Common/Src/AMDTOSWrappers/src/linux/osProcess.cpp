@@ -735,7 +735,8 @@ bool osGetProcessIdentificationInfo(osProcessId& processId, char* pName, gtSize_
      gtString name;
      name.fromASCIIString(buf);
      osFilePath path(name);
-     path.getFileName(name);
+     // don't ever strip the file extension on linux
+     path.getFileNameAndExtension(name);
      *pNameLen = name.length();
      memcpy(pName, name.asASCIICharArray(), *pNameLen);
      ret = true;

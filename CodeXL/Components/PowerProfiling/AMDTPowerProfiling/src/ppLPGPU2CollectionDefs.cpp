@@ -560,9 +560,23 @@ CollectionDefs CollectionDefs::Builder::Build()
     pCollection->LinkEndChild(pCaptureShaders);
 
 
+// TIZEN FIX set override even when m_commands is empty
+#define FORCE_DEFAULT_OVERRIDE 1
+#if FORCE_DEFAULT_OVERRIDE // new code
+
+    // Command Names
+    TiXmlElement* pCommandNames = new TiXmlElement("CommandNames");
+    if (m_commandsDefaultOverride != none)
+    {
+      pCommandNames->SetAttribute("DefaultOverride",
+        ToString(m_commandsDefaultOverride));
+    }
+#endif
+
     // Commands
     if (m_commands.size() > 0)
     {
+#if !FORCE_DEFAULT_OVERRIDE // original code
       // Command Names
       TiXmlElement* pCommandNames = new TiXmlElement("CommandNames");
       if (m_commandsDefaultOverride != none)
@@ -570,7 +584,7 @@ CollectionDefs CollectionDefs::Builder::Build()
         pCommandNames->SetAttribute("DefaultOverride",
           ToString(m_commandsDefaultOverride));
       }
-
+#endif
       for (const auto &item : m_commands)
       {
         const auto &cmnd = item.second;
@@ -583,8 +597,14 @@ CollectionDefs CollectionDefs::Builder::Build()
         pCommandNames->LinkEndChild(pCommand);
       }
 
+#if !FORCE_DEFAULT_OVERRIDE // original code
       pCollection->LinkEndChild(pCommandNames);
+#endif
     }
+
+#if FORCE_DEFAULT_OVERRIDE // new code
+    pCollection->LinkEndChild(pCommandNames);
+#endif
 
     // Config (NumberedBufferSize)
     TiXmlElement* pNumberedBufferSize = new TiXmlElement("Config");
@@ -760,10 +780,11 @@ CollectionDefs::Builder::SetCommandName(gtUInt32 apiId,
 
   if (apiInfo != apisLUT.end())
   {
+      // TIZEN FIX set cmdName before first use
+      cmdName.assign(originalCommandName.asASCIICharArray());
       auto cmdInfoPtr = apiInfo->second.cmdNamesLUT.find(cmdName);
       if (cmdInfoPtr != apiInfo->second.cmdNamesLUT.end())
       {
-          cmdName.assign(originalCommandName.asASCIICharArray());
           gtUInt32 commandId = (gtUInt32)cmdInfoPtr->second;
 
           m_commands.insert(std::pair<gtUInt32, APICommand>(commandId, APICommand{ commandId, originalCommandName,

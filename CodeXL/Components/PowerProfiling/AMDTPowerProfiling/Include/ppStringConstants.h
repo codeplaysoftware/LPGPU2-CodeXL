@@ -322,6 +322,9 @@
 #define PP_STR_iGPUDisabledMsg "iGPU is Disabled. Some of the counters will be disabled."
 #define PP_STR_dbMigrateFailureMsg "Unable to migrate the older version of CodeXL profile database."
 #define PP_STR_ProjectSettingsPathsInvalid AF_STR_newProjectExeDoesNotExistOrInvalid
+#define PP_STR_ADBStartErrorMessage L"Failed to start ADB connection"
+#define PP_STR_RAgentStartErrorMessage L"Failed to start RAgent"
+#define PP_STR_RAgentStopErrorMessage L"Failed to stop RAgent"
 
 // Strings for metrics calculations:
 #define PP_STR_LongestCounterName PP_STR_Counter_AvgFreq_Core0

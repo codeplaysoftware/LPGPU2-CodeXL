@@ -1081,13 +1081,13 @@ bool FileUtils::MergeTmpTraceFiles(SP_outStream& sout,
 
 	// ++LPGPU2: Thales: This fixes the parsing of the trace files when merging them.
 	gtString finalPrefix = strFilePrefix;
-	finalPrefix.append(L"*");
+    finalPrefix.append(L"*");
 	// --LPGPU2: Thales: This fixes the parsing of the trace files when merging them.
 
     bool ret = tempFileDirectory.getContainedFilePaths(finalPrefix, osDirectory::SORT_BY_NAME_ASCENDING, files);
 
     if (files.size() == 0)
-    {
+    {      
         Log(logWARNING, "No temp files found under %s. Nothing will be merged.\n", strTmpFilesDirPath.asUTF8CharArray());
         return false;
     }

@@ -159,7 +159,7 @@ PPFnStatus TargetDefinition::init(const gtString &xmlFilePath)
 {
   TiXmlDocument doc(xmlFilePath.asUTF8CharArray());
   bool loadOk = doc.LoadFile();
-  GT_IF_WITH_ASSERT_EX(loadOk, L"Loading TargetCharacteristics file failed.")
+  GT_IF_WITH_ASSERT_EX(loadOk, L"Loading TargetDefinition file failed.")
   {
     auto target = TargetElement{doc.FirstChildElement("Target")};
     m_target = target;

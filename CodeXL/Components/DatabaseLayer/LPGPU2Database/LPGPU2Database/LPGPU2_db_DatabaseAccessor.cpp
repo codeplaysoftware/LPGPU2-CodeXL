@@ -2458,9 +2458,11 @@ status LPGPU2DatabaseAccessor::UpdateShaderTraceFromMainShaderPacket(const Shade
     stmtGuard.Bind("@apiId", static_cast<gtUInt32>(vShaderTrace.m_apiId));
 
     stmtGuard.Bind("@srcCode", vShaderTrace.m_srcCode);
+#if 0 // TIZEN FIX - The following are not included in the statement m_pUpdateShaderTraceSourceStmt (UPDATE_SHADERTRACE_SOURCE_SQL)
     stmtGuard.Bind("@cpuTime", vShaderTrace.m_cpuTime);
     stmtGuard.Bind("@frameNum", vShaderTrace.m_frameNum);
     stmtGuard.Bind("@drawNum", vShaderTrace.m_drawNum);
+#endif
 
     stmtGuard.Exec();
 

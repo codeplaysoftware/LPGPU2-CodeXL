@@ -162,6 +162,10 @@ void afNewProjectDialog::ShowDialog(afDialogMode mode, const gtString& selectedT
     // Initialize the current project settings:
     initDialogCurrentProjectSettings();
 
+    // TIZEN FIX start the status monitor thread when the dialog is displayed
+    if (m_projectSettings.isAndroidDeviceTarget())
+        NotifyExtensionsOfHostTypeChange(lpgpu2::HostType::LPGPU2);
+
     if (mode == AF_DIALOG_NEW_PROJECT)
     {
         // Restore default values:
@@ -791,6 +795,10 @@ void afNewProjectDialog::OnOkButton()
             else if (isAndroidRemoteSession)
             {
                 m_projectSettings.setAndroidRemoteDebugging();
+
+                // TIZEN FIX disable the status monitor thread on exit
+                // Otherwise CPU time is wasted during profiling
+                NotifyExtensionsOfHostTypeChange(lpgpu2::HostType::Local);
             }
 #endif
 //--AT:LPGPU2
@@ -882,6 +890,18 @@ void afNewProjectDialog::OnCancelButton()
 
     // Restore each of the extensions settings:
     afProjectManager::instance().restoreCurrentExtensionSettings();
+
+    // Check if this is a remote session.
+
+#if LPGPU2_ANDROID_REMOTE_PROTOCOL_COMPILE_IN == 1
+    bool isAndroidRemoteSession = m_pAndroidDeviceRadioButton->isChecked();
+    if (isAndroidRemoteSession)
+    {
+        // TIZEN FIX disable the status monitor thread on exit
+        // Otherwise CPU time is wasted during profiling
+        NotifyExtensionsOfHostTypeChange(lpgpu2::HostType::Local);
+    }
+#endif
 
     // Cancel the dialog and exit:
     reject();

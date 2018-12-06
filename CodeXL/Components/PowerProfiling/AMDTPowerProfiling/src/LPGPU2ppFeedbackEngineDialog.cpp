@@ -553,9 +553,19 @@ PPFnStatus LPGPU2ppFeedbackEngineDialog::OnLoadScript()
                     // Store the option widget so we can delete it later
                     m_feedbackOptionsList.append(pOptionWidget);
 
-                    // Connect the select all checkbox event to enable the option widgets.
-                    connect(m_pSelectAllCheckBox, &QCheckBox::stateChanged, pOptionWidget, &LPGPU2ppFeedbackEngineOptionWidget::SetOptionEnabled);
-                    connect(pOptionWidget, &LPGPU2ppFeedbackEngineOptionWidget::OptionsEnabledChanged, this, &LPGPU2ppFeedbackEngineDialog::OnOptionEnabledChanged);
+                    // TIZEN FIX Disable call_sequence_analysis feedback
+                    if (acGTStringToQString(feedbackOption.scriptFunction).compare("call_sequence_analysis") == 0)
+                    {
+                        // Don't support this as it breaks the system by using memory
+                        pOptionWidget->setEnabled(false);
+                    }
+                    else
+                    {
+
+                        // Connect the select all checkbox event to enable the option widgets.
+                        connect(m_pSelectAllCheckBox, &QCheckBox::stateChanged, pOptionWidget, &LPGPU2ppFeedbackEngineOptionWidget::SetOptionEnabled);
+                        connect(pOptionWidget, &LPGPU2ppFeedbackEngineOptionWidget::OptionsEnabledChanged, this, &LPGPU2ppFeedbackEngineDialog::OnOptionEnabledChanged);
+                    }
 
                     // Finally add the option widget to the group box layout
                     pCategoryGroupBoxLayout->addWidget(pOptionWidget);
