@@ -334,5 +334,6 @@ CodeXL/Help/CodeXL User Guide/webhelp/
 !Common/Lib/Ext/OpenCLICDLoaderDetours/**/**
 
 # ComputeCpp Runtime. Is must be downloaded by the user
-Common/Lib/Ext/ComputeCpp/ComputeCpp-*
+# Ignores the ComputeCpp folder and the generated ComputeCpp-Version.props
+Common/Lib/Ext/ComputeCpp/ComputeCpp-*/
 Common/Lib/Ext/ComputeCpp/ComputeCpp-Version.props
